@@ -35,14 +35,16 @@
 
     <!-- Get Started Button -->
     <Button
-        android:id="@+id/button"
+        android:id="@+id/getstartbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
+        android:background="@drawable/btngetstart"
         android:fontFamily="@font/afacad"
         android:text="Get Start!"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="#E9E5D6" />
 
 </RelativeLayout>
