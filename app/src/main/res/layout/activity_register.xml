@@ -83,7 +83,7 @@
                 android:fontFamily="@font/afacad"
                 app:counterMaxLength="30"
                 android:textSize="20sp"
-                android:maxLength="30"
+                android:maxLength="99"
                 android:singleLine="true"
                 android:inputType="text"
                 android:textColor="@color/YGreen"/>
@@ -144,16 +144,16 @@
             android:visibility="gone"
             android:layout_gravity="center" />
 
-            <!-- Terms & Condition -->
-            <CheckBox
-                android:id="@+id/checkboxTerms"
-                android:layout_width="326dp"
-                android:layout_height="wrap_content"
-                android:text="I agree to the Terms and Conditions"
-                android:paddingTop="1dp"
-                android:textColor="@color/YGreen"/>
-
-
+        <!-- Terms & Condition -->
+        <CheckBox
+            android:id="@+id/checkboxTerms"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="@string/I_agree_to_the_Terms_and_Conditions"
+            android:textColor="@color/YGreen"
+            android:theme="@style/TermsCond"
+            android:contentDescription="@string/terms_conditions_description" />
 
         <!-- Sign Up Button -->
         <Button

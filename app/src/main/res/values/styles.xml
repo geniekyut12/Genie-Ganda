@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TermsCond" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/YGreen </item>
+        <item name="colorPrimaryDark">@color/LGreen</item>
+        <item name="colorAccent">@color/LGreen</item>
+
+    </style>
+</resources>

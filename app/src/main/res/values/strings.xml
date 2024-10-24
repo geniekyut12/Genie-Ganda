@@ -11,4 +11,10 @@
     <string name="Email">Email</string>
     <string name="Lastname">Lastname</string>
     <string name="SignUp">Sign Up</string>
+    <string name="I_agree_to_the_Terms_and_Conditions">I Agree to the Terms And Conditions</string>
+    <string name="terms_conditions_description">I Agree to the Terms And Condition</string>
+    <string name="login">Login</string>
+    <string name="click_tologin">Dont You Have an Account? Register</string>
+    <string name="clicktologin">Dont You Have Account? Register</string>
+    <string name="reg">Don\'t have an account? Register</string>
 </resources>
