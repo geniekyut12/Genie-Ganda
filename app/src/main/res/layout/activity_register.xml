@@ -35,13 +35,12 @@
                 android:id="@+id/txtFname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/afacad"
                 android:hint="@string/Firstname"
+                android:fontFamily="@font/afacad"
                 android:lines="1"
                 android:singleLine="true"
                 android:inputType="text"
                 android:textSize="20sp"
-                android:textStyle="bold"
                 android:maxLength="20"
                 android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Lastname"
                 android:fontFamily="@font/afacad"
-                android:textStyle="bold"
                 android:textSize="20sp"
                 android:maxLength="20"
                 android:singleLine="true"
@@ -81,10 +79,9 @@
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/afacad"
                 android:hint="@string/Email"
+                android:fontFamily="@font/afacad"
                 app:counterMaxLength="30"
-                android:textStyle="bold"
                 android:textSize="20sp"
                 android:maxLength="30"
                 android:singleLine="true"
@@ -107,9 +104,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Password"
+                android:fontFamily="@font/afacad"
                 android:inputType="textPassword"
                 app:counterMaxLength="20"
-                android:textStyle="bold"
                 android:textSize="20sp"
                 android:maxLength="20"
                 android:singleLine="true"
@@ -131,9 +128,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Confirmpassword"
+                android:fontFamily="@font/afacad"
                 android:inputType="textPassword"
                 app:counterMaxLength="20"
-                android:textStyle="bold"
                 android:maxLength="20"
                 android:singleLine="true"
                 android:textColor="@color/YGreen"/>
@@ -146,6 +143,17 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:layout_gravity="center" />
+
+            <!-- Terms & Condition -->
+            <CheckBox
+                android:id="@+id/checkboxTerms"
+                android:layout_width="326dp"
+                android:layout_height="wrap_content"
+                android:text="I agree to the Terms and Conditions"
+                android:paddingTop="1dp"
+                android:textColor="@color/YGreen"/>
+
+
 
         <!-- Sign Up Button -->
         <Button
@@ -168,5 +176,6 @@
             android:textColor="@color/YGreen"
             android:textSize="20sp"
             android:textStyle="italic|normal" />
+
     </LinearLayout>
 </RelativeLayout>

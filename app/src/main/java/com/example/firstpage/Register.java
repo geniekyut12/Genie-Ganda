@@ -105,22 +105,37 @@ public class Register extends AppCompatActivity {
         // Input validation
         if (TextUtils.isEmpty(firstName)) {
             txtFname.setError("First name is required.");
+            txtFname.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(lastName)) {
             txtLname.setError("Last name is required.");
+            txtLname.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(email)) {
             txtEmail.setError("Email is required.");
+            txtEmail.requestFocus();
+            return;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            txtEmail.setError("Please provide a valid email.");
+            txtEmail.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             txtpass.setError("Password is required.");
+            txtpass.requestFocus();
+            return;
+        }
+        if (password.length() < 8) {  // Check if password is at least 8 characters
+            txtpass.setError("Password must be at least 8 characters.");
+            txtpass.requestFocus();
             return;
         }
         if (!password.equals(confirmPassword)) {
             txtconpass.setError("Passwords do not match.");
+            txtconpass.requestFocus();
             return;
         }
 
@@ -130,8 +145,6 @@ public class Register extends AppCompatActivity {
         // Create a new user with Firebase Authentication
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    // Hide progressBar after task completion
-                    progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         // Sign-up successful, update the user profile
                         FirebaseUser user = mAuth.getCurrentUser();
@@ -141,6 +154,7 @@ public class Register extends AppCompatActivity {
                                     .build();
                             user.updateProfile(profileUpdates)
                                     .addOnCompleteListener(task1 -> {
+                                        progressBar.setVisibility(View.GONE); // Hide progressBar after profile update
                                         if (task1.isSuccessful()) {
                                             Toast.makeText(Register.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
                                             // Redirect to MainActivity or home screen
@@ -151,7 +165,7 @@ public class Register extends AppCompatActivity {
                                     });
                         }
                     } else {
-                        // If sign-up fails, display a message
+                        progressBar.setVisibility(View.GONE); // Hide progressBar if registration fails
                         Toast.makeText(Register.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

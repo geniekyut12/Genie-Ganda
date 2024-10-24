@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Firstpage"
         tools:targetApi="31">
         <activity
+            android:name=".Terms_Condition"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
