@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/videoViewBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <!-- First Name Label and Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/YGreen"
+            app:hintTextColor="@color/YGreen"
+            app:counterMaxLength="20"
+            app:boxStrokeColor="@color/YGreen">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtFname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/afacad"
+                android:hint="@string/Firstname"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Last Name Label and Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/YGreen"
+            app:hintTextColor="@color/YGreen">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtLname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Lastname" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Label and Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/YGreen"
+            app:hintTextColor="@color/YGreen"
+            app:counterMaxLength="20">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Email"
+                app:counterMaxLength="30"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label and Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/YGreen"
+            android:textColorHint="@color/YGreen"
+            app:hintTextColor="@color/YGreen">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Password"
+                android:inputType="textPassword"
+                app:counterMaxLength="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirm Password Label and Input -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/YGreen"
+            android:textColorHint="@color/YGreen"
+            app:hintTextColor="@color/YGreen">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtconpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Confirmpassword"
+                android:inputType="textPassword"
+                app:counterMaxLength="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+
+        <!-- Sign Up Button -->
+        <Button
+            android:id="@+id/SignUpbtn"
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:background="@color/Green"
+            android:padding="12dp"
+            android:text="@string/SignUp"
+            android:textColor="@color/YGreen" />
+
+        <!-- Login Text -->
+        <TextView
+            android:id="@+id/loginNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/afacad"
+            android:text="@string/Do_have_an_account_Login"
+            android:textColor="@color/YGreen"
+            android:textSize="20sp"
+            android:textStyle="italic|normal" />
+    </LinearLayout>
+</RelativeLayout>
