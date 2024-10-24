@@ -31,16 +31,19 @@
             app:counterMaxLength="20"
             app:boxStrokeColor="@color/YGreen">
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtFname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/afacad"
                 android:hint="@string/Firstname"
+                android:lines="1"
+                android:singleLine="true"
+                android:inputType="text"
                 android:textSize="20sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                android:maxLength="20"
+                android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Last Name Label and Input -->
@@ -56,7 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/Lastname"
-                android:fontFamily="@font/afacad"/>
+                android:fontFamily="@font/afacad"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email Label and Input -->
@@ -74,7 +83,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/afacad"
                 android:hint="@string/Email"
-                app:counterMaxLength="30"/>
+                app:counterMaxLength="30"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxLength="30"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Password Label and Input -->
@@ -93,7 +108,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Password"
                 android:inputType="textPassword"
-                app:counterMaxLength="20"/>
+                app:counterMaxLength="20"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Confirm Password Label and Input -->
@@ -112,7 +132,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Confirmpassword"
                 android:inputType="textPassword"
-                app:counterMaxLength="20"/>
+                app:counterMaxLength="20"
+                android:textStyle="bold"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColor="@color/YGreen"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- ProgressBar -->
