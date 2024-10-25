@@ -17,4 +17,6 @@
     <string name="click_tologin">Dont You Have an Account? Register</string>
     <string name="clicktologin">Dont You Have Account? Register</string>
     <string name="reg">Don\'t have an account? Register</string>
+    <string name="google_sign_in">Google</string>
+    <string name="remember_me">Remember Me</string>
 </resources>

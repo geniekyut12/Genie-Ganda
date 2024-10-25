@@ -9,6 +9,7 @@
         android:id="@+id/videoViewBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -76,8 +77,8 @@
 
         <!-- Login Button -->
         <Button
-            android:id="@+id/Loginbtn"
-            android:layout_width="326dp"
+            android:id="@+id/btnLogIn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Green"
             android:padding="12dp"
@@ -96,14 +97,18 @@
             android:textSize="20sp"
             android:textStyle="italic" />
 
-        <!-- Google Sign-In Button -->
-        <ImageView
+
+        <Button
             android:id="@+id/google_sign_in_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:padding="12dp"
-            android:src="@drawable/google" />
+            android:layout_width="40dp"
+            android:layout_height="41dp"
+            android:background="@drawable/google"
+            android:contentDescription="@string/google_sign_in"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textColor="@color/YGreen" />
+
 
     </LinearLayout>
-
 </RelativeLayout>
