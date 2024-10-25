@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/vc_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Firstpage"
-        tools:targetApi="31">
+        tools:targetApi="34">
         <activity
-            android:name=".signin"
+            android:name=".Signin"
             android:exported="false" />
         <activity
             android:name=".verify_email"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".HomePage"
             android:exported="false" />
         <activity
             android:name=".Register"

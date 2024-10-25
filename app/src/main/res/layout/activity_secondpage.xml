@@ -40,7 +40,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="36dp"
             android:text="To continue using this app,
-please sign up first."
+            please sign up first."
             android:textColor="#E9E5D6"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -49,14 +49,8 @@ please sign up first."
             android:id="@+id/btnLogIn"
             android:layout_width="294dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/btnlogin"
-            android:fontFamily="@font/afacad"
-            android:text="Log In"
-            android:textColor="#b1b8a0"
-            android:textSize="18sp" />
+            android:layout_marginBottom="12dp" />
 
-        <!-- Sign In Button -->
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="294dp"

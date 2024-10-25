@@ -89,7 +89,7 @@ public class Register extends AppCompatActivity {
         textViewLoginNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), signin.class);
+                Intent intent = new Intent(getApplicationContext(), Signin.class);
                 startActivity(intent);
                 finish();
             }
