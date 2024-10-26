@@ -1,6 +1,7 @@
 package com.example.firstpage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,10 +47,34 @@ public class Signin extends AppCompatActivity {
     private int RC_SIGN_IN = 20;
     private VideoView videoView;
 
+    // Shared Preferences for storing login state
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "loginPrefs";
+    private static final String PREF_IS_LOGGED_IN = "isLoggedIn";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check Login State on App Launch
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
+
+        // If logged in, skip to main activity
+        if (isLoggedIn) {
+            startActivity(new Intent(Signin.this, Loadingpage.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_signin);
+
+        TextView registerTextView = findViewById(R.id.Register);
+
+        registerTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(Signin.this, Register.class); // Replace 'RegisterActivity' with your registration activity name
+            startActivity(intent);
+        });
 
         // Initialize UI components
         txtEmail = findViewById(R.id.txtEmail);
@@ -57,7 +82,7 @@ public class Signin extends AppCompatActivity {
         Loginbtn = findViewById(R.id.btnLogIn);
         progressBar = findViewById(R.id.progressBar);
         google_sign_in_btn = findViewById(R.id.google_sign_in_btn);
-        videoView = findViewById(R.id.videoViewBackground); // Initialize the VideoView
+        videoView = findViewById(R.id.videoViewBackground);
 
         // Set up the video view
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background);
@@ -75,22 +100,11 @@ public class Signin extends AppCompatActivity {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
-
         gsc = GoogleSignIn.getClient(Signin.this, gso);
 
-        google_sign_in_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
+        google_sign_in_btn.setOnClickListener(v -> signIn());
 
-        Loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUpUser();
-            }
-        });
+        Loginbtn.setOnClickListener(v -> signUpUser());
     }
 
     private void signIn() {
@@ -106,32 +120,34 @@ public class Signin extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebase(account.getIdToken());
+                firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 Toast.makeText(this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void firebase(String idToken) {
+    private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebase.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = firebase.getCurrentUser();
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("id", user.getUid());
-                            map.put("name", user.getDisplayName());
-                            map.put("profile", user.getPhotoUrl().toString());
-                            database.getReference().child("userss").child(user.getUid()).setValue(map);
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = firebase.getCurrentUser();
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("id", user.getUid());
+                        map.put("name", user.getDisplayName());
+                        map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+                        database.getReference().child("users").child(user.getUid()).setValue(map);
 
-                            Intent intent = new Intent(Signin.this, Loadingpage.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(Signin.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                        // Save Login State
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(PREF_IS_LOGGED_IN, true);
+                        editor.apply();
+
+                        startActivity(new Intent(Signin.this, Loadingpage.class));
+                        finish();
+                    } else {
+                        Toast.makeText(Signin.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -160,6 +176,20 @@ public class Signin extends AppCompatActivity {
 
         // Show progressBar while signing up
         progressBar.setVisibility(View.VISIBLE);
-        // Implement sign-up logic (not provided in original code)
+        // Implement sign-up logic
+    }
+
+    // Clear Login Status on Logout
+    public void logoutUser() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(PREF_IS_LOGGED_IN, false);
+        editor.apply();
+
+        firebase.signOut();
+        gsc.signOut().addOnCompleteListener(this, task -> {
+            Intent intent = new Intent(Signin.this, Signin.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }

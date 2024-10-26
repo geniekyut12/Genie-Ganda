@@ -76,6 +76,8 @@
             android:layout_gravity="center" />
 
         <!-- Login Button -->
+
+        <!-- Register Text -->
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="wrap_content"
@@ -87,7 +89,7 @@
 
         <!-- Register Text -->
         <TextView
-            android:id="@+id/loginNow"
+            android:id="@+id/Register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -95,7 +97,9 @@
             android:text="@string/reg"
             android:textColor="@color/YGreen"
             android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:clickable="true"
+            android:focusable="true" />
 
 
         <Button
