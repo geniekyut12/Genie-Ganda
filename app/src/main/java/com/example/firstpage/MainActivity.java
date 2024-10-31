@@ -1,48 +1,53 @@
 package com.example.firstpage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private Button getstartbtn;
-
+    private static final String PREFS_NAME = "loginPrefs";
+    private static final String PREF_IS_LOGGED_IN = "isLoggedIn";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if user is logged in
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
+
+        // If logged in, start Loadingpage and finish MainActivity
+        if (isLoggedIn) {
+            Intent intent = new Intent(MainActivity.this, Loadingpage.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        // If not logged in, show MainActivity layout
         setContentView(R.layout.activity_main);
 
-
-        // next page
+        // Initialize and set up "Get Started" button
         getstartbtn = findViewById(R.id.getstartbtn);
-        getstartbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Signin.class);
-                startActivity(intent);
-            }
+        getstartbtn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Signin.class);
+            startActivity(intent);
         });
 
-        // Find VideoView by its ID
+        // Initialize and set up VideoView
         VideoView videoView = findViewById(R.id.videoViewBackground);
-
-        // Set the video path (video file in res/raw/)
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background); // resource name should be lowercase
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
         videoView.setVideoURI(uri);
-
-        // Start the video and loop it
         videoView.setOnPreparedListener(mp -> {
-            mp.setLooping(true);  // Set video looping
-            videoView.start();    // Start the video
+            mp.setLooping(true);
+            videoView.start();
         });
     }
 }

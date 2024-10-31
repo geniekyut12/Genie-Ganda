@@ -9,12 +9,13 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Home extends AppCompatActivity {
+public class Questions extends AppCompatActivity {
 
-    private ImageView ImageView;
+    private android.widget.ImageView ImageView;
     private TextView MotivationalText, DescriptionText;
     private Button CalculateButton;
 
@@ -22,7 +23,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_questions);
 
         // Initialize the UI elements
         ImageView = findViewById(R.id.imageView);

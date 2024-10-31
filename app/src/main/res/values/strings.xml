@@ -21,4 +21,12 @@
     <string name="remember_me">Remember Me</string>
     <string name="Logout">Logout</string>
     <string name="logo">Logo</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="forgotpass">Forgot your password?</string>
+    <string name="default_web_client_id" />
+    <string name="forgotpassword">Forgot Password?</string>
+    <string name="calulate">CALCULATE</string>
+    <string name="description">Take responsibility of your environmental footprint and support initiatives for global sustainability, your small steps can lead to a big impact.</string>
+    <string name="subtitle">COUNT YOUR SCORE, SEE WHAT\'S IN STORE;\nREDUCE YOUR FOOTPRINT, DO MORE!</string>
+    <string name="logo_description">LOGO</string>
 </resources>

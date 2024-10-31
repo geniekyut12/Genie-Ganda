@@ -19,11 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
@@ -96,7 +97,7 @@ public class Register extends AppCompatActivity {
         });
 
         VideoView videoView = findViewById(R.id.videoViewBackground);
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.main_background);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);
@@ -254,15 +255,27 @@ public class Register extends AppCompatActivity {
                             user.updateProfile(profileUpdates)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            Toast.makeText(Register.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(Register.this, MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                            sendVerificationEmail(user);
                                         }
                                     });
                         }
                     } else {
                         Toast.makeText(Register.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void sendVerificationEmail(FirebaseUser user) {
+        user.sendEmailVerification()
+                .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Register.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Register.this, Signin.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(Register.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
