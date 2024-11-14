@@ -65,6 +65,26 @@
                 android:textColor="@color/Green"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="326dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/Green"
+            app:hintTextColor="@color/Green">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Username"
+                android:fontFamily="@font/afacad"
+                android:textSize="20sp"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:inputType="text"
+                android:textColor="@color/Green"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- Email Label and Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="326dp"
@@ -151,6 +171,7 @@
             android:paddingBottom="15dp"
             android:textSize="14sp"
             android:text="@string/I_agree_to_the_Terms_and_Conditions"
+            android:fontFamily="@font/afacad"
             android:textColor="@color/LGreen"
             android:theme="@style/TermsCond"
             android:contentDescription="@string/terms_conditions_description" />
@@ -160,10 +181,11 @@
             android:id="@+id/SignUpbtn"
             android:layout_width="326dp"
             android:layout_height="wrap_content"
-            android:background="@color/Green"
+            android:background="@drawable/btnsignin"
             android:padding="12dp"
             android:text="@string/SignUp"
-            android:textColor="@color/YGreen" />
+            android:fontFamily="@font/afacad"
+            android:textColor="@color/LBrown" />
 
         <!-- Login Text -->
         <TextView

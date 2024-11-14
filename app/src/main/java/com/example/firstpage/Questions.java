@@ -1,5 +1,6 @@
 package com.example.firstpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,6 @@ public class Questions extends AppCompatActivity {
         // Initialize the UI elements
         ImageView = findViewById(R.id.imageView);
         MotivationalText = findViewById(R.id.motivationalText);
-        DescriptionText = findViewById(R.id.descriptionText);
         CalculateButton = findViewById(R.id.calculate);
 
         // Set up a listener for the calculate button
@@ -41,10 +41,11 @@ public class Questions extends AppCompatActivity {
     }
 
     // Define the method for the button action
+    // Define the method for the button action
     private void performCalculation() {
-        // For now, show a simple Toast message for the calculation function
-        Toast.makeText(this, "Calculation performed!", Toast.LENGTH_SHORT).show();
-
-        // Additional logic for calculation can be added here
+        // Redirect to Question1 activity
+       Intent intent = new Intent(Questions.this, Question1.class);
+        startActivity(intent);
     }
+
 }

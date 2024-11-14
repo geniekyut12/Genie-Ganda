@@ -35,10 +35,9 @@
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/Email"
+                android:hint="@string/Email_Uname"
                 android:fontFamily="@font/afacad"
                 android:textSize="20sp"
-                android:maxLength="30"
                 android:singleLine="true"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/Green" />
@@ -101,7 +100,7 @@
             android:layout_width="258dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@color/Green"
+            android:background="@drawable/btnlogin"
             android:padding="12dp"
             android:text="@string/login"
             android:textColor="@color/YGreen" />

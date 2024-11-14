@@ -27,7 +27,6 @@ public class Home extends AppCompatActivity {
         // Initialize the UI elements
         ImageView = findViewById(R.id.imageView);
         MotivationalText = findViewById(R.id.motivationalText);
-        DescriptionText = findViewById(R.id.descriptionText);
         CalculateButton = findViewById(R.id.calculate);
 
         // Set up a listener for the calculate button

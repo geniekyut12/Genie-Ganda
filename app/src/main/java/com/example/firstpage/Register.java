@@ -60,6 +60,7 @@ public class Register extends AppCompatActivity {
 
         txtFname = findViewById(R.id.txtFname);
         txtLname = findViewById(R.id.txtLname);
+        txtLname = findViewById(R.id.txtUname);
         txtEmail = findViewById(R.id.txtEmail);
         txtpass = findViewById(R.id.txtpass);
         txtconpass = findViewById(R.id.txtconpass);

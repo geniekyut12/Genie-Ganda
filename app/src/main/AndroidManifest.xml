@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Firstpage"
         tools:targetApi="34">
         <activity
+            android:name=".AfterQuestion"
+            android:exported="false" />
+        <activity
+            android:name=".Question3"
+            android:exported="false" />
+        <activity
+            android:name=".Question1"
+            android:exported="false" />
+        <activity
+            android:name=".Question2"
+            android:exported="false" />
+        <activity
             android:name=".Questions"
             android:exported="false" />
         <activity

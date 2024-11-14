@@ -29,4 +29,20 @@
     <string name="description">Take responsibility of your environmental footprint and support initiatives for global sustainability, your small steps can lead to a big impact.</string>
     <string name="subtitle">COUNT YOUR SCORE, SEE WHAT\'S IN STORE;\nREDUCE YOUR FOOTPRINT, DO MORE!</string>
     <string name="logo_description">LOGO</string>
+    <string name="questions">Do you own a television?</string>
+    <string name="yes">Yes</string>
+    <string name="No">No</string>
+    <string name="Yes">Yes</string>
+    <string name="howmanyTV">How many do you have?</string>
+    <string name="HM_TV">How many do you have?</string>
+    <string name="Username">Username</string>
+    <string name="Email_Uname">Email/Username</string>
+    <string name="nextbtn">Next</string>
+    <string name="Efan">Electricfan(s)</string>
+    <string name="Ac">Aircondition(s)</string>
+    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City University (in km.)</string>
+    <string name="question2">"How many meals do you consume \non campus per week? (in kg.)</string>
+    <string name="question3">" How often do you leave food uneaten or discard leftovers?\n(in kg.)</string>
+    <string name="WTGnote">Thank you for your responses! \nThey help us understand your impact and support you in reducing your carbon footprint. \nLet’s keep making a difference together!</string>
+    <string name="WTG">WAY TO GO!</string>
 </resources>
