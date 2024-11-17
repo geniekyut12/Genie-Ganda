@@ -49,10 +49,25 @@
         android:gravity="center"
         android:text="@string/question3"
         android:textColor="#000000"
-        android:textSize="26sp"
-        android:textStyle="italic"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/foodLayout" />
+
+    <TextView
+        android:id="@+id/questionText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:fontFamily="@font/afacad"
+        android:gravity="left"
+        android:text="@string/questionoften"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/foodLayout" />
 
@@ -60,18 +75,34 @@
         android:id="@+id/FoodPic2"
         android:layout_width="270dp"
         android:layout_height="256dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/q2pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionText3" />
 
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/afacad"
+        android:gravity="center"
+        android:text="@string/guideRB"
+        android:textColor="#6d835b"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FoodPic2" />
+
     <SeekBar
         android:id="@+id/seekBar3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:max="15"
         android:progress="0"
         android:stepSize="5.0"
@@ -79,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/FoodPic2" />
+        app:layout_constraintTop_toBottomOf="@id/guide" />
 
     <TextView
         android:id="@+id/SBtext3"

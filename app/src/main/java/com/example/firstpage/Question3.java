@@ -36,7 +36,8 @@ public class Question3 extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Show the selected value in a Toast
                 SBtext3.setVisibility(View.VISIBLE);
-                SBtext3.setText(progress+"/15");
+                SBtext3.setText(progress+"/5");
+                seekBar.setProgress(0);
 
                 Toast.makeText(Question3.this, "Selected value: " + progress, Toast.LENGTH_SHORT).show();
             }

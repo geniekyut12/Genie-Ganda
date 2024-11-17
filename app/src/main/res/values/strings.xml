@@ -40,9 +40,11 @@
     <string name="nextbtn">Next</string>
     <string name="Efan">Electricfan(s)</string>
     <string name="Ac">Aircondition(s)</string>
-    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City University (in km.)</string>
+    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City University \n(in km.)</string>
     <string name="question2">"How many meals do you consume \non campus per week? (in kg.)</string>
     <string name="question3">" How often do you leave food uneaten or discard leftovers?\n(in kg.)</string>
     <string name="WTGnote">Thank you for your responses! \nThey help us understand your impact and support you in reducing your carbon footprint. \nLet’s keep making a difference together!</string>
     <string name="WTG">WAY TO GO!</string>
+    <string name="guideRB">Drag the slider to proceed.</string>
+    <string name="questionoften">1 - Never\n2 - Rarely\n3 - Sometimes\n4 - Often\n5 - Always</string>
 </resources>

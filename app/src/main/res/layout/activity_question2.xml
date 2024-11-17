@@ -36,10 +36,6 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <!-- Question TextView -->
-
-    <!-- SeekBar (Slider) -->
-
     <TextView
         android:id="@+id/questionText2"
         android:layout_width="wrap_content"
@@ -49,7 +45,7 @@
         android:gravity="center"
         android:text="@string/question2"
         android:textColor="#000000"
-        android:textSize="26sp"
+        android:textSize="22sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
@@ -60,18 +56,34 @@
         android:id="@+id/FoodPic1"
         android:layout_width="270dp"
         android:layout_height="256dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="52dp"
         android:src="@drawable/q2pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionText2" />
 
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/afacad"
+        android:gravity="center"
+        android:text="@string/guideRB"
+        android:textColor="#6d835b"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FoodPic1" />
+
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:max="15"
         android:progress="0"
         android:stepSize="5.0"
@@ -79,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/FoodPic1" />
+        app:layout_constraintTop_toBottomOf="@id/guide" />
 
     <TextView
         android:id="@+id/SBtext2"
