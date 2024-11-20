@@ -47,4 +47,10 @@
     <string name="WTG">WAY TO GO!</string>
     <string name="guideRB">Drag the slider to proceed.</string>
     <string name="questionoften">1 - Never\n2 - Rarely\n3 - Sometimes\n4 - Often\n5 - Always</string>
+    <string name="student_id">Student Number</string>
+    <string name="Never">Never</string>
+    <string name="Rarely">Rarely</string>
+    <string name="SomeT">Sometimes</string>
+    <string name="Often">Often</string>
+    <string name="Always">Always</string>
 </resources>

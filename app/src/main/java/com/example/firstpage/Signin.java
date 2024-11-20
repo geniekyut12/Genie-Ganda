@@ -24,7 +24,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -135,16 +138,11 @@ public class Signin extends AppCompatActivity {
     }
 
     private void signUpUser() {
-        String email = txtEmail.getText().toString().trim();
+        String input = txtEmail.getText().toString().trim(); // This can be email or username
         String password = LastPass.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email)) {
-            txtEmail.setError("Email is required.");
-            txtEmail.requestFocus();
-            return;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            txtEmail.setError("Please provide a valid email.");
+        if (TextUtils.isEmpty(input)) {
+            txtEmail.setError("Email or username is required.");
             txtEmail.requestFocus();
             return;
         }
@@ -156,6 +154,38 @@ public class Signin extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
+        if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
+            // Input is an email
+            loginWithEmail(input, password);
+        } else {
+            // Input is a username; fetch the associated email
+            database.getReference().child("users").orderByChild("username").equalTo(input)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                    String email = userSnapshot.child("email").getValue(String.class);
+                                    loginWithEmail(email, password); // Attempt login with the fetched email
+                                    return;
+                                }
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                txtEmail.setError("Username not found.");
+                                txtEmail.requestFocus();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(Signin.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void loginWithEmail(String email, String password) {
         firebase.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     progressBar.setVisibility(View.GONE);

@@ -11,34 +11,33 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Question2 extends AppCompatActivity {
 
     private SeekBar seekBar;
-    TextView SBtext2;
+    private TextView SBtext2;
+    private int finalAnswer = 0; // Variable to store the final selected value
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question2);
 
-        // Initialize the SeekBar
+        // Initialize the SeekBar and TextView
         seekBar = findViewById(R.id.seekBar2);
         SBtext2 = findViewById(R.id.SBtext2);
+
         // Setup the SeekBar with a listener
         setupSeekBar();
     }
 
-    // Function to set up the SeekBar and handle value changes
     private void setupSeekBar() {
-        // Set initial progress (optional)
-        seekBar.setProgress(50);  // Set initial progress to 50 out of 100
+        // Set initial progress
+        seekBar.setProgress(0);  // Start SeekBar at 0
+        SBtext2.setText("0/15"); // Display the initial value
 
         // Add listener for value changes
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Show the selected value in a Toast
-                SBtext2.setVisibility(View.VISIBLE);
-                SBtext2.setText(progress+"/15");
-
-                Toast.makeText(Question2.this, "Selected value: " + progress, Toast.LENGTH_SHORT).show();
+                // Update the TextView to show the current progress
+                SBtext2.setText(progress + "/15");
             }
 
             @Override
@@ -48,8 +47,15 @@ public class Question2 extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Optionally handle when the user stops sliding
+                // Capture the final progress when the user stops sliding
+                finalAnswer = seekBar.getProgress();
+
+                // Display the final value in a Toast
+                Toast.makeText(Question2.this, "Final selected value: " + finalAnswer, Toast.LENGTH_SHORT).show();
+
+                // Pass the final answer to the next activity
                 Intent intent = new Intent(Question2.this, Question3.class);
+                intent.putExtra("selectedValue", finalAnswer);
                 startActivity(intent);
             }
         });

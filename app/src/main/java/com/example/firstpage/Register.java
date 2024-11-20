@@ -1,15 +1,15 @@
 package com.example.firstpage;
 
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.graphics.Typeface;
+import static android.content.ContentValues.TAG;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,34 +19,40 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    private EditText txtFname, txtLname, txtEmail, txtpass, txtconpass;
+    private EditText txtFname, txtLname, txtEmail, txtpass, txtconpass, studentId;
     private Button SignUpbtn;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private TextView textViewLoginNow;
     private CheckBox checkboxTerms;
+    private boolean isRegistering = false;
 
-    @Override
+
     protected void onStart() {
         super.onStart();
         if (mAuth == null) {
             mAuth = FirebaseAuth.getInstance();
         }
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+        // Only redirect if user is verified and we're not in the registration process
+        if (currentUser != null && currentUser.isEmailVerified() && !isRegistering) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
     }
@@ -57,44 +63,34 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
+        // Initialize views
         txtFname = findViewById(R.id.txtFname);
         txtLname = findViewById(R.id.txtLname);
-        txtLname = findViewById(R.id.txtUname);
         txtEmail = findViewById(R.id.txtEmail);
         txtpass = findViewById(R.id.txtpass);
         txtconpass = findViewById(R.id.txtconpass);
+        studentId = findViewById(R.id.student_id); // Assuming student ID is another field
         SignUpbtn = findViewById(R.id.SignUpbtn);
         progressBar = findViewById(R.id.progressBar);
         textViewLoginNow = findViewById(R.id.loginNow);
         checkboxTerms = findViewById(R.id.checkboxTerms);
 
         // Show terms and conditions dialog on checkbox click
-        checkboxTerms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTermsDialog();
+        checkboxTerms.setOnClickListener(v -> showTermsDialog());
+
+        SignUpbtn.setOnClickListener(v -> {
+            if (!checkboxTerms.isChecked()) {
+                Toast.makeText(getApplicationContext(), "You must agree to the terms and conditions.", Toast.LENGTH_SHORT).show();
+                return;
             }
+            signUpUser();
         });
 
-        SignUpbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!checkboxTerms.isChecked()) {
-                    Toast.makeText(getApplicationContext(), "You must agree to the terms and conditions.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                signUpUser();
-            }
-        });
-
-        textViewLoginNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Signin.class);
-                startActivity(intent);
-                finish();
-            }
+        textViewLoginNow.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), Signin.class));
+            finish();
         });
 
         VideoView videoView = findViewById(R.id.videoViewBackground);
@@ -104,6 +100,15 @@ public class Register extends AppCompatActivity {
             mp.setLooping(true);
             videoView.start();
         });
+    }
+    // Helper method to validate names (only letters)
+    private boolean isValidName(String name) {
+        return name.matches("^[a-zA-Z]+$");
+    }
+
+    // Helper method to validate student ID (only numbers)
+    private boolean isValidStudentId(String id) {
+        return id.matches("^[0-9]+$");
     }
 
     private void showTermsDialog() {
@@ -150,12 +155,9 @@ public class Register extends AppCompatActivity {
                 "10. Contact Information\n" +
                 "•\tFor any questions or concerns regarding these Terms and Conditions or the use of the C-Verde application, you can contact us at C-Verde Facebook page.\n";
 
-        // Initialize spannableTerms with the terms string
         SpannableString spannableTerms = new SpannableString(terms);
 
-        // Array of titles and their starting positions
-        String[] titles = {
-                "Terms and Conditions for C Verde",
+        String[] titles = { "Terms and Conditions for C Verde",
                 "1. Acceptance of Terms",
                 "2. Use of the Application",
                 "3. Data Collection and Privacy",
@@ -165,39 +167,21 @@ public class Register extends AppCompatActivity {
                 "7. Updates and Changes",
                 "8. Termination",
                 "9. Governing Law",
-                "10. Contact Information",
-        };
-
-        // Bold the titles and their corresponding numbers
+                "10. Contact Information",};
         for (String title : titles) {
             int startIndex = terms.indexOf(title);
             if (startIndex != -1) {
                 int endIndex = startIndex + title.length();
-                spannableTerms.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableTerms.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), startIndex, endIndex, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
 
-        // Set the spannable message to the dialog
         builder.setMessage(spannableTerms);
-
-        builder.setPositiveButton("I Agree", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                checkboxTerms.setChecked(true); // Mark checkbox as checked when user agrees
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                checkboxTerms.setChecked(false); // Uncheck the checkbox if user cancels
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("I Agree", (dialog, which) -> checkboxTerms.setChecked(true));
+        builder.setNegativeButton("Cancel", (dialog, which) -> checkboxTerms.setChecked(false));
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
     private void signUpUser() {
         String firstName = txtFname.getText().toString().trim();
@@ -205,15 +189,22 @@ public class Register extends AppCompatActivity {
         String email = txtEmail.getText().toString().trim();
         String password = txtpass.getText().toString().trim();
         String confirmPassword = txtconpass.getText().toString().trim();
+        String studentID = studentId.getText().toString().trim();
 
-        if (TextUtils.isEmpty(firstName)) {
-            txtFname.setError("First name is required.");
+        // Validate fields
+        if (TextUtils.isEmpty(firstName) || !isValidName(firstName)) {
+            txtFname.setError("First name must only contain letters.");
             txtFname.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(lastName)) {
-            txtLname.setError("Last name is required.");
+        if (TextUtils.isEmpty(lastName) || !isValidName(lastName)) {
+            txtLname.setError("Last name must only contain letters.");
             txtLname.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(studentID) || !isValidStudentId(studentID)) {
+            studentId.setError("Student ID must be a number.");
+            studentId.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(email)) {
@@ -241,7 +232,6 @@ public class Register extends AppCompatActivity {
             txtconpass.requestFocus();
             return;
         }
-
         progressBar.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -256,12 +246,17 @@ public class Register extends AppCompatActivity {
                             user.updateProfile(profileUpdates)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
+                                            saveUserToFirestore(user, firstName, lastName, email);
                                             sendVerificationEmail(user);
                                         }
                                     });
                         }
                     } else {
-                        Toast.makeText(Register.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                            txtEmail.setError("Email is already registered.");
+                        } else {
+                            Toast.makeText(Register.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
@@ -272,12 +267,25 @@ public class Register extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(Register.this, "Verification email sent. Please check your email.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register.this, Signin.class);
-                        startActivity(intent);
+                        startActivity(new Intent(Register.this, Signin.class));
                         finish();
                     } else {
-                        Toast.makeText(Register.this, "Failed to send verification email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void saveUserToFirestore(FirebaseUser user, String firstName, String lastName, String email) {
+        String userId = user.getUid();
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("email", email);
+        userData.put("firstName", firstName);
+        userData.put("lastName", lastName);
+        userData.put("registeredAt", FieldValue.serverTimestamp());
+
+        db.collection("users").document(userId)
+                .set(userData)
+                .addOnSuccessListener(aVoid -> Log.d(TAG, "User profile saved to Firestore"))
+                .addOnFailureListener(e -> Log.w(TAG, "Error saving user profile", e));
     }
 }

@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity {
             videoView.start();
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing when back button is pressed
+        // This disables the default back button behavior
+    }
 }
