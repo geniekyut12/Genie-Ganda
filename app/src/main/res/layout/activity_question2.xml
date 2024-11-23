@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/FoodPic1"
-        android:layout_width="270dp"
-        android:layout_height="256dp"
+        android:layout_width="299dp"
+        android:layout_height="299dp"
         android:layout_marginTop="52dp"
         android:src="@drawable/q2pic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
         android:id="@+id/guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/afacad"
         android:gravity="center"
         android:text="@string/guideRB"
@@ -75,14 +75,14 @@
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.021"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/FoodPic1" />
 
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
         android:max="15"
         android:progress="0"
@@ -95,12 +95,14 @@
 
     <TextView
         android:id="@+id/SBtext2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="27dp"
         android:layout_marginTop="4dp"
         android:visibility="invisible"
-        tools:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar2"
-        tools:layout_editor_absoluteX="305dp" />
+        tools:text="TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

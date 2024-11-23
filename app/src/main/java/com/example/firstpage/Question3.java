@@ -1,45 +1,66 @@
 package com.example.firstpage;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Question3 extends AppCompatActivity {
 
-    private RadioGroup radioGroup;
-    private RadioButton selectedRadioButton;
+    private RadioGroup radioGroupOptions;
+    private int finalAnswer = -1; // Variable to store the final selected value (-1 means no selection)
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);  // Replace with your layout XML name
+        setContentView(R.layout.activity_question3);
 
-        radioGroup = findViewById(R.id.FScale);
+        // Initialize the RadioGroup
+        radioGroupOptions = findViewById(R.id.radioGroupOptions);
 
-        // Set the listener to handle radio button selection
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // Check if a radio button is selected
-                selectedRadioButton = findViewById(checkedId);
+        // Set up the RadioGroup listener
+        setupRadioGroup();
+    }
 
-                // Check if any radio button is selected, then navigate to the next activity
-                if (selectedRadioButton != null) {
-                    // Proceed to the next screen when a choice is selected
-                    navigateToNextScreen();
-                }
+    private void setupRadioGroup() {
+        radioGroupOptions.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radioNever) {
+                finalAnswer = 0;
+            } else if (checkedId == R.id.radioRarely) {
+                finalAnswer = 1;
+            } else if (checkedId == R.id.radioSometimes) {
+                finalAnswer = 2;
+            } else if (checkedId == R.id.radioOften) {
+                finalAnswer = 3;
+            } else if (checkedId == R.id.radioAlways) {
+                finalAnswer = 4;
+            } else {
+                finalAnswer = -1; // No valid selection
             }
+
+            // Display a toast message for the selected option
+            String selectedOption = ((RadioButton) findViewById(checkedId)).getText().toString();
+            Toast.makeText(Question3.this, "Selected: " + selectedOption, Toast.LENGTH_SHORT).show();
+
+            // Redirect to the next activity after selection
+            redirectToNextActivity();
         });
     }
 
-    private void navigateToNextScreen() {
-        // Intent to move to AfterQuestion Activity
-        Intent intent = new Intent(Question3.this, AfterQuestion.class);
-        startActivity(intent);
+
+    private void redirectToNextActivity() {
+        if (finalAnswer != -1) {
+            Intent intent = new Intent(Question3.this, AfterQuestion.class);
+            intent.putExtra("selectedValue", finalAnswer);
+            startActivity(intent);
+
+            // Finish current activity to prevent returning to it
+            finish();
+        } else {
+            Toast.makeText(this, "Please select an option.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

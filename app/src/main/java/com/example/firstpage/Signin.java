@@ -13,7 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,10 +26,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
@@ -38,7 +38,7 @@ public class Signin extends AppCompatActivity {
     private ProgressBar progressBar;
     private GoogleSignInOptions gso;
     private FirebaseAuth firebase;
-    private FirebaseDatabase database;
+    private FirebaseFirestore db;
     private GoogleSignInClient gsc;
     private static final int RC_SIGN_IN = 20;
     private VideoView videoView;
@@ -80,7 +80,7 @@ public class Signin extends AppCompatActivity {
         });
 
         firebase = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -123,7 +123,7 @@ public class Signin extends AppCompatActivity {
                         map.put("id", user.getUid());
                         map.put("name", user.getDisplayName());
                         map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
-                        database.getReference().child("users").child(user.getUid()).setValue(map);
+                        db.collection("users").document(user.getUid()).set(map);
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean(PREF_IS_LOGGED_IN, true);
@@ -155,31 +155,20 @@ public class Signin extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
-            // Input is an email
             loginWithEmail(input, password);
         } else {
-            // Input is a username; fetch the associated email
-            database.getReference().child("users").orderByChild("username").equalTo(input)
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                                    String email = userSnapshot.child("email").getValue(String.class);
-                                    loginWithEmail(email, password); // Attempt login with the fetched email
-                                    return;
-                                }
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                txtEmail.setError("Username not found.");
-                                txtEmail.requestFocus();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+            // Query Firestore instead of Realtime Database
+            db.collection("users")
+                    .whereEqualTo("username", input)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            String email = task.getResult().getDocuments().get(0).getString("email");
+                            loginWithEmail(email, password);
+                        } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(Signin.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                            txtEmail.setError("Username not found.");
+                            txtEmail.requestFocus();
                         }
                     });
         }
@@ -190,13 +179,24 @@ public class Signin extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(PREF_IS_LOGGED_IN, true);
-                        editor.apply();
+                        FirebaseUser user = firebase.getCurrentUser();
+                        if (user != null && user.isEmailVerified()) {
+                            // Email verified, log the user in
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean(PREF_IS_LOGGED_IN, true);
+                            editor.apply();
 
-                        startActivity(new Intent(Signin.this, Loadingpage.class));
-                        finish();
+                            startActivity(new Intent(Signin.this, Loadingpage.class));
+                            finish();
+                        } else if (user != null && !user.isEmailVerified()) {
+                            // Email not verified, show error message
+                            Toast.makeText(Signin.this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
+                            firebase.signOut();  // Sign the user out if email is not verified
+                        } else {
+                            Toast.makeText(Signin.this, "User not found.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
+                        // Login failed due to wrong credentials or other errors
                         Toast.makeText(Signin.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

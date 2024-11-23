@@ -2,7 +2,6 @@ package com.example.firstpage;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,12 +50,15 @@ public class Question2 extends AppCompatActivity {
                 finalAnswer = seekBar.getProgress();
 
                 // Display the final value in a Toast
-                Toast.makeText(Question2.this, "Final selected value: " + finalAnswer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Question2.this, "Selected value: " + finalAnswer, Toast.LENGTH_SHORT).show();
 
-                // Pass the final answer to the next activity
+                // Automatically redirect to Question3
                 Intent intent = new Intent(Question2.this, Question3.class);
                 intent.putExtra("selectedValue", finalAnswer);
                 startActivity(intent);
+
+                // Optionally finish the current activity to remove it from the back stack
+                finish();
             }
         });
     }

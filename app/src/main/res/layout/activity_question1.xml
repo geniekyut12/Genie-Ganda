@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:contentDescription="@string/q1"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/transportation"
@@ -56,12 +57,11 @@
 
     <ImageView
         android:id="@+id/TransPic"
-        android:layout_width="245dp"
-        android:layout_height="229dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="299dp"
+        android:layout_height="299dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/q1pic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionText2" />
 
@@ -84,12 +84,12 @@
     <SeekBar
         android:id="@+id/seekBar1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginTop="16dp"
-        android:max="15"
+        android:max="50"
         android:progress="0"
         android:stepSize="5.0"
-        android:value="15"
+        android:value="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,6 +103,8 @@
         android:visibility="invisible"
         tools:text="TextView"
         app:layout_constraintTop_toBottomOf="@+id/seekBar1"
-        tools:layout_editor_absoluteX="305dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

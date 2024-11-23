@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // If logged in, start Loadingpage and finish MainActivity
         if (isLoggedIn) {
-            Intent intent = new Intent(MainActivity.this, Loadingpage.class);
+            Intent intent = new Intent(MainActivity.this, navbar.class);
             startActivity(intent);
             finish();
             return;
@@ -51,9 +51,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        // Do nothing when back button is pressed
-        // This disables the default back button behavior
-    }
 }

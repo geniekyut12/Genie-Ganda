@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    private EditText txtFname, txtLname, txtEmail, txtpass, txtconpass, studentId;
+    private EditText txtUsername, txtFname, txtLname, txtEmail, txtpass, txtconpass, studentId;
     private Button SignUpbtn;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -43,14 +43,13 @@ public class Register extends AppCompatActivity {
     private CheckBox checkboxTerms;
     private boolean isRegistering = false;
 
-
+    @Override
     protected void onStart() {
         super.onStart();
         if (mAuth == null) {
             mAuth = FirebaseAuth.getInstance();
         }
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        // Only redirect if user is verified and we're not in the registration process
         if (currentUser != null && currentUser.isEmailVerified() && !isRegistering) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
@@ -66,12 +65,13 @@ public class Register extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Initialize views
+        txtUsername = findViewById(R.id.txtUname);
         txtFname = findViewById(R.id.txtFname);
         txtLname = findViewById(R.id.txtLname);
         txtEmail = findViewById(R.id.txtEmail);
         txtpass = findViewById(R.id.txtpass);
         txtconpass = findViewById(R.id.txtconpass);
-        studentId = findViewById(R.id.student_id); // Assuming student ID is another field
+        studentId = findViewById(R.id.student_id);
         SignUpbtn = findViewById(R.id.SignUpbtn);
         progressBar = findViewById(R.id.progressBar);
         textViewLoginNow = findViewById(R.id.loginNow);
@@ -101,14 +101,15 @@ public class Register extends AppCompatActivity {
             videoView.start();
         });
     }
+
     // Helper method to validate names (only letters)
     private boolean isValidName(String name) {
         return name.matches("^[a-zA-Z]+$");
     }
 
-    // Helper method to validate student ID (only numbers)
+    // Helper method to validate student ID (numbers and hyphens)
     private boolean isValidStudentId(String id) {
-        return id.matches("^[0-9]+$");
+        return id.matches("^[0-9]+-[0-9]+$"); // Ensures proper format like "21-1977"
     }
 
     private void showTermsDialog() {
@@ -184,6 +185,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void signUpUser() {
+        String username = txtUsername.getText().toString().trim();
         String firstName = txtFname.getText().toString().trim();
         String lastName = txtLname.getText().toString().trim();
         String email = txtEmail.getText().toString().trim();
@@ -191,7 +193,11 @@ public class Register extends AppCompatActivity {
         String confirmPassword = txtconpass.getText().toString().trim();
         String studentID = studentId.getText().toString().trim();
 
-        // Validate fields
+        if (TextUtils.isEmpty(username) || username.length() < 3) {
+            txtUsername.setError("Username must be at least 3 characters long.");
+            txtUsername.requestFocus();
+            return;
+        }
         if (TextUtils.isEmpty(firstName) || !isValidName(firstName)) {
             txtFname.setError("First name must only contain letters.");
             txtFname.requestFocus();
@@ -203,7 +209,7 @@ public class Register extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(studentID) || !isValidStudentId(studentID)) {
-            studentId.setError("Student ID must be a number.");
+            studentId.setError("Student ID must be in the format 'XX-XXXX' (numbers and a hyphen).");
             studentId.requestFocus();
             return;
         }
@@ -241,12 +247,12 @@ public class Register extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(firstName + " " + lastName)
+                                    .setDisplayName(username)
                                     .build();
                             user.updateProfile(profileUpdates)
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            saveUserToFirestore(user, firstName, lastName, email);
+                                            saveUserToFirestore(user, username, firstName, lastName, email, studentID);
                                             sendVerificationEmail(user);
                                         }
                                     });
@@ -275,12 +281,14 @@ public class Register extends AppCompatActivity {
                 });
     }
 
-    private void saveUserToFirestore(FirebaseUser user, String firstName, String lastName, String email) {
+    private void saveUserToFirestore(FirebaseUser user, String username, String firstName, String lastName, String email, String studentID) {
         String userId = user.getUid();
         Map<String, Object> userData = new HashMap<>();
+        userData.put("username", username);
         userData.put("email", email);
         userData.put("firstName", firstName);
         userData.put("lastName", lastName);
+        userData.put("studentID", studentID); // Save student ID
         userData.put("registeredAt", FieldValue.serverTimestamp());
 
         db.collection("users").document(userId)

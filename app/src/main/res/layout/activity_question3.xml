@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:contentDescription="@string/foodlogo"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/food"
@@ -41,170 +43,104 @@
         android:id="@+id/questionText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/afacad"
         android:gravity="center"
         android:text="@string/question3"
         android:textColor="#000000"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintTop_toBottomOf="@id/foodLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/foodLayout" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Food Image -->
     <ImageView
         android:id="@+id/FoodPic2"
         android:layout_width="270dp"
         android:layout_height="256dp"
-        android:src="@drawable/q2pic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="256dp"
-        tools:ignore="MissingConstraints" />
-
-    <!-- RadioGroup for Radio Buttons -->
-    <RadioGroup
-        android:id="@+id/FScale"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:src="@drawable/q3pic"
+        app:layout_constraintTop_toBottomOf="@id/questionText3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Guide TextView -->
+
+    <!-- RadioGroup with options -->
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/afacad"
+        android:gravity="center"
+        android:text="@string/guideq3"
+        android:textColor="#6d835b"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FoodPic2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupOptions"
+        android:layout_width="382dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/FoodPic2">
+        app:layout_constraintTop_toBottomOf="@id/guide">
 
-        <!-- always button -->
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioNever"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/Never"
             android:background="@drawable/q3choices"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="#000000" />
 
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@string/Always"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/alwys"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@drawable/q3button" />
-        </LinearLayout>
-
-        <!-- often button -->
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioRarely"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/Rarely"
             android:background="@drawable/q3choices"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:fontFamily="@font/poppinsregular"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@string/Often"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/oftn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@drawable/q3button" />
-        </LinearLayout>
-
-        <!-- sometimes button -->
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioSometimes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/SomeT"
             android:background="@drawable/q3choices"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:fontFamily="@font/poppinsregular"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@string/SomeT"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/smtms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@drawable/q3button" />
-        </LinearLayout>
-
-        <!-- rarely button -->
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioOften"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/Often"
             android:background="@drawable/q3choices"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:fontFamily="@font/poppinsregular"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@string/Rarely"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/rrly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@drawable/q3button" />
-        </LinearLayout>
-
-        <!-- never button -->
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/radioAlways"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/Always"
             android:background="@drawable/q3choices"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppinsregular"
-                android:text="@string/Never"
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <RadioButton
-                android:id="@+id/nvr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@drawable/q3button" />
-        </LinearLayout>
+            android:fontFamily="@font/poppinsregular"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"
+            android:paddingStart="10dp"/>
     </RadioGroup>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

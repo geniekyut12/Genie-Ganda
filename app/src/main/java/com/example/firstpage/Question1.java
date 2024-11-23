@@ -31,7 +31,7 @@ public class Question1 extends AppCompatActivity {
     private void setupSeekBar() {
         // Set initial progress (optional)
         seekBar.setProgress(0);  // Set initial progress to the midpoint (assuming max = 15)
-        SBtext1.setText("0/15"); // Display the initial value
+        SBtext1.setText("0/50"); // Display the initial value
 
         // Add listener for value changes
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -39,7 +39,7 @@ public class Question1 extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Update the text dynamically but do not record the value yet
                 SBtext1.setVisibility(View.VISIBLE);
-                SBtext1.setText(progress + "/15");
+                SBtext1.setText(progress + "/50");
             }
 
             @Override

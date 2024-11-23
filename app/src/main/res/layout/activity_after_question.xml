@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg2"
+        android:src="@color/LTGreen"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
@@ -30,7 +30,7 @@
 
 
     <TextView
-        android:id="@+id/questionText2"
+        android:id="@+id/wtg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
@@ -45,7 +45,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/questionText2"
+        android:id="@+id/wtgm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
@@ -58,20 +58,19 @@
         android:textColor="#000000"
         android:textSize="22sp"/>
 
+
     <Button
-        android:id="@+id/getstartbtn"
-        android:layout_width="match_parent"
-        android:layout_height="683dp"
+        android:id="@+id/nextbtn"
+        android:layout_width="357dp"
+        android:layout_height="68dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="14dp"
-        android:background="@drawable/btngetstart"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="89dp"
+        android:background="@drawable/btnsignin"
         android:fontFamily="@font/afacad"
         android:text="."
         android:textAllCaps="false" />
-
-
 
     <TextView
         android:layout_width="wrap_content"

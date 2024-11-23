@@ -53,4 +53,42 @@
     <string name="SomeT">Sometimes</string>
     <string name="Often">Often</string>
     <string name="Always">Always</string>
+
+
+    <string name="home">Home\n</string>
+    <string name="footprint">Footprint</string>
+    <string name="rewards">Rewards\n</string>
+    <string name="profile">Profile</string>
+    <string name="about">About\n</string>
+    <string name="what">What YOU can do</string>
+    <string name="bike">Change the way you travel</string>
+    <string name="bikes">Embracing sustainable transportation practices is key for reducing carbon footprints. Opting for greener alternatives like walking, biking to campus, carpooling, and using public transportation can significantly reduce emissions.</string>
+    <string name="energy">Reduce your energy</string>
+    <string name="energys">Lorem ipsum dolor sit amet,  consectetur adipiscing elit,  sed do eiusmod tempor.</string>
+    <string name="eat">Change what you eat</string>
+    <string name="eats">One of the most beneficial actions you can take for the planet is to significantly adopting a healthy and balanced diet that includes a greater variety of plant-based foods, sourcing meat and fish from...</string>
+    <string name="wastes">Reduce food waste</string>
+    <string name="wastess">Lorem ipsum dolor sit amet, consectetur dipiscing elit, sed do eiusmod tempor. jsnncnjsncudcnccnsnksmxx\n</string>
+    <string name="supportss">SUPPORT SUSTAINABILITY.\nCUT CARBON.\nGAIN REWARDS!</string>
+    <string name="enterprise">Enterprises and Discounts</string>
+    <string name="textssss">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</string>
+    <string name="cverde">C Verde is an innovative platform that empower individuals and enterprises to take part in top-tier carbon activities.</string>
+    <string name="learn">Learn More</string>
+    <string name="action">Your actions are \nharming the environment.</string>
+    <string name="foodwaste">Food Waste</string>
+    <string name="kgss">10 kgs</string>
+    <string name="thankyou">Thank you for making the effort to stay green!</string>
+    <string name="food">Food</string>
+    <string name="kgs">80 kgs</string>
+    <string name="name">Hello, Juan Dela Cruz</string>
+    <string name="text">You have emitted  120 kg CO2 this week</string>
+    <string name="breakdown">Breakdown\n</string>
+    <string name="c">About C Verde</string>
+    <string name="abouts">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="bikers" />
+    <string name="masugid_icon" />
+    <string name="masugident">Masugid Enterprise</string>
+    <string name="q1">\n</string>
+    <string name="guideq3">Choose one to continue</string>
+    <string name="foodlogo" />
 </resources>
