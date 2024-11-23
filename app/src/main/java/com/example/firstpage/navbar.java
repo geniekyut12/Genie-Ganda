@@ -2,13 +2,15 @@ package com.example.firstpage;
 
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class navbar extends AppCompatActivity {
 
-    private int selectedItemId = R.id.nav_home; // Store the selected item ID
+    // Declare a variable to store the selected item ID
+    private int selectedItemId = R.id.nav_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +25,15 @@ public class navbar extends AppCompatActivity {
         // Load the specified fragment, or default to homepage
         if (savedInstanceState == null) {
             if (fragmentToLoad != null && fragmentToLoad.equals("footprint")) {
-                loadFragment(new FootPrintFragment(), false); // No back stack for the first fragment
+                loadFragment(new FootPrintFragment(), false); // No need to add to back stack for first fragment
                 selectedItemId = R.id.nav_footprint;
             } else {
-                loadFragment(new homepage(), false); // Default homepage fragment
+                loadFragment(new homepage(), false); // Default homepage fragment, no back stack
                 selectedItemId = R.id.nav_home;
             }
         }
 
-        // Set up the bottom navigation view item selection listener
+        // Set up bottom navigation view item selection listener
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
@@ -58,7 +60,9 @@ public class navbar extends AppCompatActivity {
             }
 
             // Reset all items to default icon color
-            resetItemColors(bottomNavigationView);
+            for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+                bottomNavigationView.getMenu().getItem(i).getIcon().setTint(Color.GRAY); // Default color
+            }
 
             // Highlight the selected item icon with a light green color
             item.getIcon().setTint(Color.parseColor("#90EE90")); // Light green
@@ -82,37 +86,11 @@ public class navbar extends AppCompatActivity {
         transaction.commit(); // Commit the transaction
     }
 
-    // Reset all items to their default color
-    private void resetItemColors(BottomNavigationView bottomNavigationView) {
-        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
-            bottomNavigationView.getMenu().getItem(i).getIcon().setTint(Color.GRAY); // Default color
-        }
-    }
-
     @Override
     public void onBackPressed() {
-        // Handle back press event: Pop from the fragment stack if possible
+        // Handle back press event: Pop from fragment stack if possible
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack(); // Pop the fragment off the stack
-
-            // After popping the fragment, update the selected item color
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-            resetItemColors(bottomNavigationView);
-
-            // Update the selected item based on the fragment shown
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            if (currentFragment instanceof FootPrintFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_footprint);
-            } else if (currentFragment instanceof homepage) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_home);
-            } else if (currentFragment instanceof RewardsFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_rewards);
-            } else if (currentFragment instanceof ProfileFragment) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_profile);
-            }
-
-            // Highlight the newly selected item
-            bottomNavigationView.getMenu().getItem(bottomNavigationView.getSelectedItemId()).getIcon().setTint(Color.parseColor("#90EE90")); // Light green
         } else {
             super.onBackPressed(); // Default behavior (finish activity if no fragments left in stack)
         }
