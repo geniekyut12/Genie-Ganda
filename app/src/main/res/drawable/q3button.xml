@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Selected state -->
-    <item android:state_checked="true" android:color="@color/Green" /> <!-- Green color -->
-    <!-- Default state -->
-    <item android:state_checked="false" android:color="#000000" /> <!-- Black color -->
-</selector>
+<!-- res/drawable/q3choices.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/q3bg" /> <!-- White background for the button -->
+    <corners android:radius="8dp" /> <!-- Rounded corners (optional) -->
+    <stroke
+        android:color="@color/Green"
+        android:width="2dp" /> <!-- Border color for the RadioButton -->
+</shape>

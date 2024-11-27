@@ -18,14 +18,21 @@ public class AfterQuestion extends AppCompatActivity {
         // Initialize and set up "Next" button
         nextbtn = findViewById(R.id.nextbtn);
         nextbtn.setOnClickListener(v -> {
+            // Create an Intent to navigate to the navbar activity
             Intent intent = new Intent(AfterQuestion.this, navbar.class);
+
+            // Specify that the FootPrintFragment should be loaded
+            intent.putExtra("fragment_to_load", "footprint");
+
             // Clear the back stack to prevent going back to this activity
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            // Start the navbar activity
             startActivity(intent);
             finish();
         });
 
-        // Retrieve the selected answer (String)
+        // Retrieve the selected answer (String) from the previous activity
         String selectedAnswer = getIntent().getStringExtra("selected_answer");
         if (selectedAnswer != null) {
             Toast.makeText(this, "Received answer: " + selectedAnswer, Toast.LENGTH_SHORT).show();
@@ -39,7 +46,8 @@ public class AfterQuestion extends AppCompatActivity {
         // Optionally display a message or log the back press
         Toast.makeText(this, "You cannot go back from this page.", Toast.LENGTH_SHORT).show();
 
-        // Call super.onBackPressed() to adhere to the requirement
-        super.onBackPressed();
+        // Prevent back navigation by not calling super.onBackPressed()
+        // Uncomment the next line if you want to allow back navigation
+        // super.onBackPressed();
     }
 }

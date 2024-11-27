@@ -5,18 +5,23 @@
     android:layout_height="match_parent">
 
     <!-- Full-screen VideoView for background video -->
+
+    <!-- Get Started Button -->
+
     <ImageView
         android:id="@+id/WTGbg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@color/LTGreen"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
-    <!-- Get Started Button -->
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="2dp"
+        android:scaleType="centerCrop"
+        android:src="@color/LTGreen" />
 
     <ImageView
         android:id="@+id/logo"
@@ -36,8 +41,8 @@
         android:layout_below="@+id/logo"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-16dp"
-        android:layout_marginEnd="81dp"
-        android:fontFamily="@font/afacad"
+        android:layout_marginEnd="55dp"
+        android:fontFamily="@font/poppinsregular"
         android:gravity="center"
         android:text="@string/WTG"
         android:textColor="#000000"
@@ -50,39 +55,28 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="73dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="25dp"
         android:fontFamily="@font/afacad"
         android:gravity="center"
         android:text="@string/WTGnote"
         android:textColor="#000000"
-        android:textSize="22sp"/>
-
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/nextbtn"
-        android:layout_width="357dp"
-        android:layout_height="68dp"
-        android:layout_alignParentEnd="true"
+        android:layout_width="231dp"
+        android:layout_height="59dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="89dp"
-        android:background="@drawable/btnsignin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="159dp"
+        android:background="@drawable/calculate"
         android:fontFamily="@font/afacad"
-        android:text="."
-        android:textAllCaps="false" />
+        android:text="@string/savequest"
+        android:textAllCaps="false"
+        android:textColor="@color/Brown"
+        android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="146dp"
-        android:layout_marginBottom="97dp"
-        android:fontFamily="@font/afacad"
-        android:text="Get Started!"
-        android:textColor="#E9E5D6"
-        android:textSize="22sp" />
 
 </RelativeLayout>

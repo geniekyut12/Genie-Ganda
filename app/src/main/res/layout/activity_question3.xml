@@ -13,7 +13,7 @@
         android:id="@+id/foodLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/afacad"
-            android:text="Food"
+            android:text="@string/food"
             android:textColor="#000000"
             android:textStyle="bold"
             android:textSize="18sp" />
@@ -43,12 +43,12 @@
         android:id="@+id/questionText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/afacad"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppinsregular"
         android:gravity="center"
         android:text="@string/question3"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="23sp"
         app:layout_constraintTop_toBottomOf="@id/foodLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -56,9 +56,9 @@
     <!-- Food Image -->
     <ImageView
         android:id="@+id/FoodPic2"
-        android:layout_width="270dp"
-        android:layout_height="256dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/q3pic"
         app:layout_constraintTop_toBottomOf="@id/questionText3"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         android:id="@+id/guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/afacad"
         android:gravity="center"
         android:text="@string/guideq3"
@@ -85,7 +85,7 @@
 
     <RadioGroup
         android:id="@+id/radioGroupOptions"
-        android:layout_width="382dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
@@ -97,47 +97,51 @@
             android:id="@+id/radioNever"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Never"
             android:background="@drawable/q3choices"
+            android:text="@string/Never"
             android:fontFamily="@font/poppinsregular"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:paddingStart="10dp"/>
 
         <RadioButton
             android:id="@+id/radioRarely"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Rarely"
             android:background="@drawable/q3choices"
+            android:text="@string/Rarely"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="16dp"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:paddingStart="10dp"/>
 
         <RadioButton
             android:id="@+id/radioSometimes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/SomeT"
             android:background="@drawable/q3choices"
+            android:text="@string/SomeT"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="16dp"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:paddingStart="10dp"/>
 
         <RadioButton
             android:id="@+id/radioOften"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Often"
             android:background="@drawable/q3choices"
+            android:text="@string/Often"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="16dp"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:paddingStart="10dp"/>
 
         <RadioButton
             android:id="@+id/radioAlways"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Always"
             android:background="@drawable/q3choices"
+            android:text="@string/Always"
             android:fontFamily="@font/poppinsregular"
             android:layout_marginTop="16dp"
             android:textColor="#000000"

@@ -9,5 +9,8 @@
         <color name="BGreen">#ABC992</color>
         <color name="q3bg">#D9D9D9</color>
         <color name="LTGreen">#E3EED4</color>
+        <color name="RBBG"> #F8FFF5</color>
+        <color name="mainbg"> #F9FFF1</color>
+        <color name="entsoc"> #452C13</color>
 
 </resources>

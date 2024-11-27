@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">firstpage</string>
+    <string name="app_name">C-Verde</string>
     <string name="register">register</string>
     <string name="email">email</string>
     <string name="password">password\n</string>
@@ -27,7 +27,6 @@
     <string name="forgotpassword">Forgot Password?</string>
     <string name="calulate">CALCULATE</string>
     <string name="description">Take responsibility of your environmental footprint and support initiatives for global sustainability, your small steps can lead to a big impact.</string>
-    <string name="subtitle">COUNT YOUR SCORE, SEE WHAT\'S IN STORE;\nREDUCE YOUR FOOTPRINT, DO MORE!</string>
     <string name="logo_description">LOGO</string>
     <string name="questions">Do you own a television?</string>
     <string name="yes">Yes</string>
@@ -40,10 +39,9 @@
     <string name="nextbtn">Next</string>
     <string name="Efan">Electricfan(s)</string>
     <string name="Ac">Aircondition(s)</string>
-    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City University \n(in km.)</string>
-    <string name="question2">"How many meals do you consume \non campus per week? (in kg.)</string>
+    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City \nUniversity (in km.)</string>
+    <string name="question2">"How many meals do you consume on campus\n per week? (in kg.)</string>
     <string name="question3">" How often do you leave food uneaten or discard leftovers?\n(in kg.)</string>
-    <string name="WTGnote">Thank you for your responses! \nThey help us understand your impact and support you in reducing your carbon footprint. \nLet’s keep making a difference together!</string>
     <string name="WTG">WAY TO GO!</string>
     <string name="guideRB">Drag the slider to proceed.</string>
     <string name="questionoften">1 - Never\n2 - Rarely\n3 - Sometimes\n4 - Often\n5 - Always</string>
@@ -84,11 +82,48 @@
     <string name="text">You have emitted  120 kg CO2 this week</string>
     <string name="breakdown">Breakdown\n</string>
     <string name="c">About C Verde</string>
-    <string name="abouts">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="bikers" />
     <string name="masugid_icon" />
     <string name="masugident">Masugid Enterprise</string>
     <string name="q1">\n</string>
     <string name="guideq3">Choose one to continue</string>
     <string name="foodlogo" />
+    <string name="challanges">Challanges</string>
+    <string name="SemiQq1">Choose you mode of transportation/s</string>
+    <string name="Bus">Bus</string>
+    <string name="Jeep">Jeep</string>
+    <string name="Car">Car</string>
+    <string name="Motor">Motorcycle</string>
+    <string name="Tricycle">Tricycle</string>
+    <string name="q1next">Next</string>
+    <string name="subtitle">Start by answering a few questions. \nYour responses will give us a rough estimate of your carbon emissions. \n\nRemember, there are no right or wrong answers. It’s not about \nperfection but about guiding your next steps for action. \n\nReady?</string>
+
+    <string name="WTGnote">Thank you for your answers! \nYour insights will help us understand your \nimpact and guide you in reducing\n your carbon footprint. \n\nLet’s keep making a difference together!</string>
+    <string name="savequest">Save Changes</string>
+    <string name="MasugidIcon">\n</string>
+    <string name="MasugidEnt">Masugid Enterprise</string>
+    <string name="WaniEnt">\n</string>
+    <string name="playmakerEnt">\n</string>
+    <string name="hello">Hello there!</string>
+    <string name="machuritto">"Machuritto"</string>
+    <string name="enqEnt">Enquiries can be directed to:</string>
+    <string name="masugidIG">\@masugid_enterprise</string>
+    <string name="mas_email">masugidenterprise2b@gmail.com</string>
+    <string name="masugiddesc">Masugid Enterprise is a student-led business from Quezon City University (QCU) offering churros with a unique twist—served with creamy matcha. \n\nThis venture combines the popular snack of churros with a rich, smooth matcha flavor, appealing to those who enjoy classic treats with a modern, flavorful upgrade.</string>
+    <string name="masugidtitle">Masugid Enterprise</string>
+    <string name="Wani">Wani Enterprise</string>
+    <string name="sawaff">“Sa-WAFF Panalo”</string>
+    <string name="wanidesc">Wani Enterprise, run by Quezon City University (QCU) students, offers unique, savory waffles for an affordable 25 pesos each. With flavors like asado and adobo, the business blends Filipino-inspired tastes with the popular waffle format, aiming to provide a satisfying and budget-friendly snack for students and the local community.</string>
+    <string name="waniIG">\@wanienterprise</string>
+    <string name="wani_num">0951-003-5060</string>
+    <string name="waniPhone">\n</string>
+    <string name="wanipic">\n</string>
+    <string name="wanilogo">\n</string>
+    <string name="playmlogo">\n</string>
+    <string name="playm_fb">Playmaker Enterprise</string>
+    <string name="playmtitle">Playmaker Enterprise</string>
+    <string name="jackofpie">“Langka-Tulad, Langka-Pantay at \nLangkasing-Sarap na Jack of Pie”</string>
+    <string name="playmdesc">Playmaker Enterprise is established by a group of students from Quezon City University, pursuing a Bachelor of Science in Entrepreneurship, with a shared vision and determination to make a meaningful impact in the culinary landscape. Drawing upon their academic background and passion for entrepreneurship, the students saw an opportunity to leverage their skills and creativity to create a business that not only generates profits but also makes a positive difference in their community.\n\nWith a focus on serving delicious pies infused with the unique flavors of jackfruit, the students recognized the potential to introduce something innovative and distinctive to the market. Their choice of jackfruit as a main ingredient reflects not only their desire to offer something unexpected and delightful but also their commitment to supporting local agriculture and promoting sustainability.</string>
+    <string name="abouts">"         C-Verde is an innovative mobile application designed to help individuals monitor and reduce their carbon footprint in an accessible way. By tracking daily activities like transportation, electricity usage, food consumption, and waste generation, \nC-Verde provides users with valuable insights into their environmental impact and encourages sustainable practices. Through its intuitive interface, users can enter data about their routines, and the app calculates their carbon footprint, giving a clear overview of the environmental impact of their actions. With tailored recommendations on how to reduce emissions and adopt eco-friendly habits. C-Verde empowers users to make informed decisions and take actionable steps toward a more sustainable lifestyle. In addition to tracking emissions, C-Verde offers challenges and tasks that motivate users to reduce their carbon footprint. Successful completion of these challenges rewards users with vouchers, encouraging continued engagement and improvement in sustainability efforts. These rewards come from enterprises that align with C-Verde's mission of promoting environmental sustainability.\nC-Verde’s ultimate goal is to create a community of QCU students who actively contribute to reducing global carbon emissions. The app is designed to be user-friendly and accessible, making sustainability easy to integrate into everyday life. \nBy providing feedback and tailored suggestions, C-Verde helps users adopt greener habits that can have a lasting positive impact on the environment. \nWith a focus on privacy, C-Verde ensures that all personal data is securely stored and never shared with third parties without user consent. The app’s features are continually updated to improve functionality and offer even more ways for users to reduce their environmental impact. C-Verde is not just an app; it’s a movement towards a more sustainable future. Whether you’re looking to make a small change or completely overhaul your lifestyle, C-Verde provides the tools and motivation to make a difference.\n"</string>
+
 </resources>

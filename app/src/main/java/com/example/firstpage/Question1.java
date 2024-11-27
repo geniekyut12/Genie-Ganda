@@ -3,6 +3,8 @@ package com.example.firstpage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,25 +14,38 @@ public class Question1 extends AppCompatActivity {
 
     private SeekBar seekBar;
     private TextView SBtext1;
+    private Button nextButton;
     private int finalAnswer = 0; // Variable to store the final selected value
+
+    private CheckBox checkboxBus, checkboxJeep, checkboxCar, checkboxTric, checkboxMotor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question1);
 
-        // Initialize the SeekBar and TextView
+        // Initialize views
         seekBar = findViewById(R.id.seekBar1);
         SBtext1 = findViewById(R.id.SBtext1);
+        nextButton = findViewById(R.id.q1btn);
 
-        // Setup the SeekBar with a listener
+        // CheckBox initialization
+        checkboxBus = findViewById(R.id.checkboxBus);
+        checkboxJeep = findViewById(R.id.checkboxJeep);
+        checkboxCar = findViewById(R.id.checkboxCar);
+        checkboxTric = findViewById(R.id.checkboxTric);
+        checkboxMotor = findViewById(R.id.checkboxMotor);
+
+        // Setup the SeekBar
         setupSeekBar();
+
+        // Next button click listener
+        nextButton.setOnClickListener(v -> validateAndProceed());
     }
 
-    // Function to set up the SeekBar and handle value changes
     private void setupSeekBar() {
         // Set initial progress (optional)
-        seekBar.setProgress(0);  // Set initial progress to the midpoint (assuming max = 15)
+        seekBar.setProgress(0);  // Set initial progress to the midpoint (assuming max = 50)
         SBtext1.setText("0/50"); // Display the initial value
 
         // Add listener for value changes
@@ -51,13 +66,27 @@ public class Question1 extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // Record the final value when the user stops sliding
                 finalAnswer = seekBar.getProgress();
-                Toast.makeText(Question1.this, "Final selected value: " + finalAnswer, Toast.LENGTH_SHORT).show();
-
-                // Move to the next question
-                Intent intent = new Intent(Question1.this, Question2.class);
-                intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
-                startActivity(intent);
             }
         });
+    }
+
+    private void validateAndProceed() {
+        // Check if SeekBar is not at 0 progress
+        if (finalAnswer == 0) {
+            Toast.makeText(this, "Please select a value on the SeekBar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Check if at least one checkbox is selected
+        if (!(checkboxBus.isChecked() || checkboxJeep.isChecked() || checkboxCar.isChecked() ||
+                checkboxTric.isChecked() || checkboxMotor.isChecked())) {
+            Toast.makeText(this, "Please select at least one transportation option", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Proceed to the next activity if validation passes
+        Intent intent = new Intent(Question1.this, Question2.class);
+        intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
+        startActivity(intent);
     }
 }

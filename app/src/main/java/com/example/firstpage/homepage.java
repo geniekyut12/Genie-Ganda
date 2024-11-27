@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
@@ -17,11 +17,27 @@ public class homepage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_homepage, container, false);
 
-        // Set an OnClickListener for the "Learn More" TextView
-        TextView learnMoreTextView = view.findViewById(R.id.learn_more_button);
-        learnMoreTextView.setOnClickListener(v -> {
-            // Navigate to the next activity when clicked
-            Intent intent = new Intent(getActivity(), LearnMore.class); // Replace LearnMore.class with your target activity
+        // Set up click listeners for each LinearLayout
+        LinearLayout masugidLayout = view.findViewById(R.id.masugidEntR);
+        LinearLayout waniLayout = view.findViewById(R.id.waniEntR);
+        LinearLayout playmakerLayout = view.findViewById(R.id.playmakerEntR);
+
+        // Set up onClick listeners for each layout
+        masugidLayout.setOnClickListener(v -> {
+            // Navigate to Masugid Enterprise activity
+            Intent intent = new Intent(getActivity(), Masugid_Ent.class); // Replace with actual activity
+            startActivity(intent);
+        });
+
+        waniLayout.setOnClickListener(v -> {
+            // Navigate to Wani Enterprise activity
+            Intent intent = new Intent(getActivity(), Wani_Ent.class); // Replace with actual activity
+            startActivity(intent);
+        });
+
+        playmakerLayout.setOnClickListener(v -> {
+            // Navigate to Playmaker Enterprise activity
+            Intent intent = new Intent(getActivity(), PlayMaker_Ent.class); // Replace with actual activity
             startActivity(intent);
         });
 

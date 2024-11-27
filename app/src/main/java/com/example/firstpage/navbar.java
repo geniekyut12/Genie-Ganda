@@ -2,14 +2,12 @@ package com.example.firstpage;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class navbar extends AppCompatActivity {
 
-    // Declare a variable to store the selected item ID
     private int selectedItemId = R.id.nav_home;
 
     @Override
@@ -19,25 +17,21 @@ public class navbar extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
-        // Check if a specific fragment is requested via intent
         String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
 
-        // Load the specified fragment, or default to homepage
         if (savedInstanceState == null) {
-            if (fragmentToLoad != null && fragmentToLoad.equals("footprint")) {
-                loadFragment(new FootPrintFragment(), false); // No need to add to back stack for first fragment
+            if ("footprint".equals(fragmentToLoad)) {
+                loadFragment(new FootPrintFragment(), false);
                 selectedItemId = R.id.nav_footprint;
             } else {
-                loadFragment(new homepage(), false); // Default homepage fragment, no back stack
-                selectedItemId = R.id.nav_home;
+                loadFragment(new FootPrintFragment(), false);
+                selectedItemId = R.id.nav_footprint;
             }
         }
 
-        // Set up bottom navigation view item selection listener
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
-            // Determine which fragment to load based on the selected item
             if (item.getItemId() == R.id.nav_footprint) {
                 selectedFragment = new FootPrintFragment();
                 selectedItemId = R.id.nav_footprint;
@@ -54,45 +48,39 @@ public class navbar extends AppCompatActivity {
                 return false;
             }
 
-            // Load the selected fragment and add it to the back stack
             if (selectedFragment != null) {
-                loadFragment(selectedFragment, true); // Add to back stack
+                loadFragment(selectedFragment, true);
             }
 
-            // Reset all items to default icon color
             for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
-                bottomNavigationView.getMenu().getItem(i).getIcon().setTint(Color.GRAY); // Default color
+                bottomNavigationView.getMenu().getItem(i).getIcon().setTint(Color.GRAY);
             }
 
-            // Highlight the selected item icon with a light green color
-            item.getIcon().setTint(Color.parseColor("#90EE90")); // Light green
-
+            item.getIcon().setTint(Color.parseColor("#90EE90"));
             return true;
         });
 
-        // Ensure the previously selected item is marked as selected when the activity is restored
         bottomNavigationView.setSelectedItemId(selectedItemId);
     }
 
-    // Helper method to load a fragment into the fragment container
     private void loadFragment(Fragment fragment, boolean addToBackStack) {
-        androidx.fragment.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, fragment); // Replace existing fragment
+        androidx.fragment.app.FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment);
 
         if (addToBackStack) {
-            transaction.addToBackStack(null); // Add fragment transaction to back stack
+            transaction.addToBackStack(null);
         }
 
-        transaction.commit(); // Commit the transaction
+        transaction.commit();
     }
 
     @Override
     public void onBackPressed() {
-        // Handle back press event: Pop from fragment stack if possible
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack(); // Pop the fragment off the stack
+            getSupportFragmentManager().popBackStack();
         } else {
-            super.onBackPressed(); // Default behavior (finish activity if no fragments left in stack)
+            super.onBackPressed();
         }
     }
 }

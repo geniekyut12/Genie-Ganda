@@ -2,6 +2,7 @@ package com.example.firstpage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class Question2 extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // Update the TextView to show the current progress
+                SBtext2.setVisibility(View.VISIBLE);
                 SBtext2.setText(progress + "/15");
             }
 

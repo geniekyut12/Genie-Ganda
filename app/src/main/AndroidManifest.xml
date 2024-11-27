@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,7 +13,22 @@
         android:roundIcon="@mipmap/vc_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Firstpage"
-        tools:targetApi="34">
+        tools:targetApi="34" >
+        <activity
+            android:name=".LearnMore"
+            android:exported="false" />
+        <activity
+            android:name=".Wani_Ent"
+            android:exported="false" />
+        <activity
+            android:name=".PlayMaker_Ent"
+            android:exported="false" />
+        <activity
+            android:name=".wani_circle"
+            android:exported="false" />
+        <activity
+            android:name=".Masugid_Ent"
+            android:exported="false" />
         <activity
             android:name=".navbar"
             android:exported="false" />
@@ -22,9 +37,6 @@
             android:exported="false" />
         <activity
             android:name=".homepage"
-            android:exported="false" />
-        <activity
-            android:name=".LearnMore"
             android:exported="false" />
         <activity
             android:name=".Chall"
@@ -58,7 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
