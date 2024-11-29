@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class homepage extends Fragment {
 
@@ -39,6 +42,19 @@ public class homepage extends Fragment {
             // Navigate to Playmaker Enterprise activity
             Intent intent = new Intent(getActivity(), PlayMaker_Ent.class); // Replace with actual activity
             startActivity(intent);
+        });
+
+        // Set up the challenge button to navigate to RewardsFragment
+        Button challengeButton = view.findViewById(R.id.challengebtn);
+        challengeButton.setOnClickListener(v -> {
+            // Navigate to RewardsFragment
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            RewardsFragment rewardsFragment = new RewardsFragment(); // Replace with actual fragment class
+            fragmentTransaction.replace(R.id.fragment_container, rewardsFragment); // Ensure fragment_container exists in your main layout
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         return view;

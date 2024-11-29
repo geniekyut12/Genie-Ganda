@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/mainbg"
     android:padding="16dp">
 
     <ScrollView
@@ -27,6 +27,7 @@
                 android:text="@string/what"
                 android:textColor="#000000"
                 android:textSize="24sp"
+                android:fontFamily="@font/publicsans_bold"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/wayoftravel"
                         android:elevation="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -66,9 +67,10 @@
                             android:layout_marginTop="-20dp"
                             android:text="@string/bike"
                             android:textAlignment="center"
-                            android:textColor="#000000"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/RBBG"
+                            android:fontFamily="@font/publicsans_bold"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -76,46 +78,9 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/bikes"
                             android:textAlignment="center"
-                            android:textColor="#000000"
+                            android:textColor="@color/LTGreen"
+                            android:fontFamily="@font/publicsans_reg"
                             android:textSize="10sp" />
-                    </LinearLayout>
-
-                    <!-- Second Box (Example continuation) -->
-                    <LinearLayout
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/roundedbox_energy"
-                        android:elevation="4dp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <!-- Increase Image Size -->
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/energy_saver" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="@string/energy"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/energys"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!-- Third Box (Example continuation) -->
@@ -123,7 +88,7 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/youeat"
                         android:elevation="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -142,9 +107,9 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/eat"
                             android:textAlignment="center"
-                            android:textColor="#000000"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/RBBG"
+                            android:fontFamily="@font/publicsans_bold" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -152,15 +117,18 @@
                             android:layout_marginTop="4dp"
                             android:text="@string/eats"
                             android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
+                            android:textColor="@color/LTGreen"
+                            android:fontFamily="@font/publicsans_reg"
+                            android:textSize="10sp"/>
+
+
                     </LinearLayout>
                     <!-- Fourth Box (Example continuation) -->
                     <LinearLayout
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/redfoodwaste"
                         android:elevation="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -179,9 +147,9 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/wastes"
                             android:textAlignment="center"
-                            android:textColor="#000000"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
+                            android:textColor="@color/RBBG"
+                            android:fontFamily="@font/publicsans_bold"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -189,24 +157,13 @@
                             android:layout_marginTop="4dp"
                             android:text="@string/wastess"
                             android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
+                            android:textColor="@color/LTGreen"
+                            android:fontFamily="@font/publicsans_reg"
+                            android:textSize="10sp"/>
                     </LinearLayout>
                     <!-- Add more boxes as needed -->
                 </LinearLayout>
             </HorizontalScrollView>
-
-
-            <!-- Title -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/what"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
 
             <!-- Supporting Text -->
             <TextView
@@ -216,7 +173,8 @@
                 android:text="@string/supportss"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/publicsans_bold"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -225,14 +183,15 @@
                 android:text="@string/enterprise"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/publicsans_bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="@string/textssss"
+                android:text="@string/homepagedesc"
                 android:textColor="#000000"
                 android:textSize="10sp" />
 
@@ -257,21 +216,22 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/masugid_home"
                         android:onClick="onRectangleClick">
 
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:contentDescription="@string/MasugidIcon"
-                            android:src="@drawable/masugid_enterprise" />
+                            android:src="@drawable/masugid_circle" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/MasugidEnt"
-                            android:textColor="#000000"
+                            android:fontFamily="@font/publicsans_bold"
+                            android:textColor="#F9FFF1"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -281,7 +241,7 @@
                         android:layout_width="200dp"
                         android:layout_height="100dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/wani_home"
                         android:elevation="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -292,14 +252,15 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:contentDescription="@string/WaniEnt"
-                            android:src="@drawable/wa_enterprise" />
+                            android:src="@drawable/wani_circle" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/Wani"
-                            android:textColor="#000000"
+                            android:fontFamily="@font/publicsans_bold"
+                            android:textColor="#F9FFF1"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -309,7 +270,7 @@
                         android:layout_width="200dp"
                         android:layout_height="100dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_box"
+                        android:background="@drawable/playmaker_home"
                         android:elevation="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -320,14 +281,15 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:contentDescription="@string/playmakerEnt"
-                            android:src="@drawable/playmaker" />
+                            android:src="@drawable/playm_circle" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Masugid Enterprise"
-                            android:textColor="#000000"
+                            android:text="@string/playmtitle"
+                            android:fontFamily="@font/publicsans_bold"
+                            android:textColor="#F9FFF1"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -360,6 +322,19 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:onClick="navigateToNextPage" />
+
+            <Button
+                android:id="@+id/challengebtn"
+                android:layout_width="352dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:background="@drawable/challengebtn1"
+                android:onClick="navigateToNextPage1"
+                android:padding="0dp"
+                android:text="@string/challenge_home"
+                android:textColor="@color/LTGreen"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
