@@ -2,43 +2,42 @@ package com.example.firstpage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AfterQuestion extends AppCompatActivity {
 
     private Button nextbtn;
+    private static final String TAG = "TotalCarbonActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_question);
 
-        // Initialize and set up "Next" button
-        nextbtn = findViewById(R.id.nextbtn);
-        nextbtn.setOnClickListener(v -> {
-            // Create an Intent to navigate to the navbar activity
-            Intent intent = new Intent(AfterQuestion.this, navbar.class);
+        // Initialize UI elements
+        TextView tvTotalCarbon = findViewById(R.id.tv_total_carbon);
+        Button btnBack = findViewById(R.id.nextbtn);
 
-            // Specify that the FootPrintFragment should be loaded
-            intent.putExtra("fragment_to_load", "footprint");
+        // Retrieve the total carbon footprint passed from FoodWasteActivity
+        double totalCarbon = getIntent().getDoubleExtra("total_carbon", 0.0);
 
-            // Clear the back stack to prevent going back to this activity
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        // Log the received total carbon footprint for debugging
+        Log.d(TAG, "Received total carbon footprint: " + totalCarbon);
 
-            // Start the navbar activity
-            startActivity(intent);
+        // Display the total carbon footprint in the TextView
+        tvTotalCarbon.setText(String.format("%.2f g CO₂", totalCarbon));
+
+        // Back button click listener
+        btnBack.setOnClickListener(v -> {
+            // Navigate back to the MainActivity
+            Intent backIntent = new Intent(AfterQuestion.this, navbar.class);
+            startActivity(backIntent);
             finish();
         });
-
-        // Retrieve the selected answer (String) from the previous activity
-        String selectedAnswer = getIntent().getStringExtra("selected_answer");
-        if (selectedAnswer != null) {
-            Toast.makeText(this, "Received answer: " + selectedAnswer, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "No answer received", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override

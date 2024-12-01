@@ -94,44 +94,44 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guide" />
 
-        <TextView
-            android:id="@+id/SBtext1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seekBar1"
-            tools:text="TextView" />
+    <TextView
+        android:id="@+id/SBtext1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar1"
+        tools:text="TextView" />
 
-        <TextView
+    <TextView
             android:id="@+id/SemiQ1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:fontFamily="@font/afacad"
+            android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             android:text="@string/SemiQq1"
             android:textColor="#000000"
-            android:textSize="19sp"
+            android:textSize="15sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/seekBar1" />
+            app:layout_constraintTop_toBottomOf="@id/SBtext1" />
 
     <LinearLayout
         android:id="@+id/CbxQ1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="472dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/SemiQ1">
 
         <CheckBox
             android:id="@+id/checkboxBus"

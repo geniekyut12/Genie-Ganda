@@ -128,4 +128,25 @@
     <string name="challenge_home">Challenge yourself now!</string>
     <string name="homepagedesc">C-Verde collaborates with Masugid, Wani, and Playmaker to promote sustainability through user engagement. Users can earn discounts or vouchers by participating in challenges and when users reach specific carbon emission reduction goals. The potential larger discounts are redeemable green products from the enterprises.</string>
 
+    <string name="termsacondition"><![CDATA[<![CDATA[Privacy & Terms]]></string>
+    <string name="noone">1. Acceptance of Terms</string>
+    <string name="termsandcondition"><![CDATA[Privacy & Terms]]></string>
+    <string name="textfour">Ensuring that the information you provide is accurate and up-to-date. Regularly updating the app to benefit from new features and improvements.</string>
+    <string name="nofour">4. User Responsibilities You are responsible for:</string>
+    <string name="textthree">C-Verde collects and processes personal information, such as your daily activities, energy usage, and travel habits, to calculate your carbon footprint.</string>
+    <string name="nothree">3. Data Collection and Privacy</string>
+    <string name="texttwo">Avoid any unauthorized access, tampering, or reverse engineering of the application.</string>
+    <string name="texttwos">• Use the app for lawful purposes and in compliance with all applicable laws.</string>
+    <string name="texttwosss">• Provide accurate data regarding your activities to ensure accurate carbon footprint tracking.</string>
+    <string name="txttwo">C-Verde is a carbon footprint tracker that allows users to monitor and reduce their environmental impact. By using the application, you agree to:</string>
+    <string name="notwo">2. Use of the Application</string>
+    <string name="textone">By downloading, installing, or using the C-Verde application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the application.</string>
+    <string name="lastname">Last Name</string>
+    <string name="points">POINTS: 85</string>
+    <string name="collects">Collect points to redeem special awards</string>
+    <string name="totalcarbs">Your Total Carbon Footprint:</string>
+    <string name="totalcarbon">0.00 g CO₂</string>
+    <string name="Walk">Walking</string>
+    <string name="Bikebtn">Bike</string>
+
 </resources>

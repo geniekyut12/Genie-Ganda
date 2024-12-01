@@ -2,12 +2,12 @@ package com.example.firstpage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Question1 extends AppCompatActivity {
@@ -18,6 +18,8 @@ public class Question1 extends AppCompatActivity {
     private int finalAnswer = 0; // Variable to store the final selected value
 
     private CheckBox checkboxBus, checkboxJeep, checkboxCar, checkboxTric, checkboxMotor;
+    private int distance = 5; // Default distance (in km)
+    private double totalCarbonFootprint = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,57 +38,68 @@ public class Question1 extends AppCompatActivity {
         checkboxTric = findViewById(R.id.checkboxTric);
         checkboxMotor = findViewById(R.id.checkboxMotor);
 
-        // Setup the SeekBar
-        setupSeekBar();
+        // Log initialization to check if views are null
+        Log.d("Question1", "SeekBar: " + seekBar);
+        Log.d("Question1", "TextView: " + SBtext1);
+        Log.d("Question1", "CheckBox (Tricycle): " + checkboxTric);
+        Log.d("Question1", "CheckBox (Jeep): " + checkboxJeep);
+        Log.d("Question1", "CheckBox (Bus): " + checkboxBus);
+        Log.d("Question1", "CheckBox (Motorcycle): " + checkboxMotor);
+        Log.d("Question1", "CheckBox (Car): " + checkboxCar);
+        Log.d("Question1", "Button: " + nextButton);
 
-        // Next button click listener
-        nextButton.setOnClickListener(v -> validateAndProceed());
-    }
-
-    private void setupSeekBar() {
-        // Set initial progress (optional)
-        seekBar.setProgress(0);  // Set initial progress to the midpoint (assuming max = 50)
-        SBtext1.setText("0/50"); // Display the initial value
-
-        // Add listener for value changes
+        // Set up SeekBar listener to update distance
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Update the text dynamically but do not record the value yet
+                distance = progress;
+                SBtext1.setText(distance + " km"); // Update the distance display
                 SBtext1.setVisibility(View.VISIBLE);
-                SBtext1.setText(progress + "/50");
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Optionally handle when the user starts sliding
+                // Do nothing
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Record the final value when the user stops sliding
-                finalAnswer = seekBar.getProgress();
+                // Do nothing
             }
         });
-    }
 
-    private void validateAndProceed() {
-        // Check if SeekBar is not at 0 progress
-        if (finalAnswer == 0) {
-            Toast.makeText(this, "Please select a value on the SeekBar", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // Set up the Next button listener
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Reset the total carbon footprint
+                totalCarbonFootprint = 0.0;
 
-        // Check if at least one checkbox is selected
-        if (!(checkboxBus.isChecked() || checkboxJeep.isChecked() || checkboxCar.isChecked() ||
-                checkboxTric.isChecked() || checkboxMotor.isChecked())) {
-            Toast.makeText(this, "Please select at least one transportation option", Toast.LENGTH_SHORT).show();
-            return;
-        }
+                // Calculate carbon footprint for each mode of transportation
+                if (checkboxTric.isChecked()) {
+                    totalCarbonFootprint += distance * 71; // Example: Tricycle emits 71g CO2 per km
+                }
+                if (checkboxJeep.isChecked()) {
+                    totalCarbonFootprint += distance * 150; // Example: Jeep emits 150g CO2 per km
+                }
+                if (checkboxBus.isChecked()) {
+                    totalCarbonFootprint += distance * 90; // Example: Bus emits 90g CO2 per km
+                }
+                if (checkboxCar.isChecked()) {
+                    totalCarbonFootprint += distance * 170; // Example: Car emits 170g CO2 per km
+                }
+                if (checkboxMotor.isChecked()) {
+                    totalCarbonFootprint += distance * 0; // Motor (bicycle) emits 0g CO2 per km
+                }
 
-        // Proceed to the next activity if validation passes
-        Intent intent = new Intent(Question1.this, Question2.class);
-        intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
-        startActivity(intent);
+                // Log the carbon footprint for debugging
+                Log.d("Question1", "Total Carbon Footprint: " + totalCarbonFootprint);
+
+                // Proceed to the next activity
+                Intent intent = new Intent(Question1.this, Question2.class);
+                intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
+                startActivity(intent);
+            }
+        });
     }
 }

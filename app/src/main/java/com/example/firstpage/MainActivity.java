@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // If logged in, start Loadingpage and finish MainActivity
         if (isLoggedIn) {
-            Intent intent = new Intent(MainActivity.this, navbar.class);
+            Intent intent = new Intent(MainActivity.this,Questions.class);
             startActivity(intent);
             finish();
             return;
