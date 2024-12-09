@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BGreen"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/BGreen"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        tools:context=".YourActivityName">
 
         <!-- Header with ImageView and TextView -->
         <LinearLayout
@@ -38,7 +43,6 @@
         </LinearLayout>
 
         <!-- SeekBar (Slider) -->
-
         <TextView
             android:id="@+id/questionText2"
             android:layout_width="wrap_content"
@@ -94,109 +98,130 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guide" />
 
-    <TextView
-        android:id="@+id/SBtext1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar1"
-        tools:text="TextView" />
+        <TextView
+            android:id="@+id/SBtext1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar1"
+            tools:text="TextView" />
 
-    <TextView
+        <TextView
             android:id="@+id/SemiQ1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="1dp"
             android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             android:text="@string/SemiQq1"
             android:textColor="#000000"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/SBtext1" />
 
-    <LinearLayout
-        android:id="@+id/CbxQ1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SemiQ1">
-
-        <CheckBox
-            android:id="@+id/checkboxBus"
+        <RadioGroup
+            android:id="@+id/radioGroupQ1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/q3choices"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingStart="10dp"
-            android:text="@string/Bus"
-            android:textColor="#000000" />
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/SemiQ1">
 
-        <CheckBox
-            android:id="@+id/checkboxJeep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/q3choices"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingStart="10dp"
-            android:text="@string/Jeep"
-            android:textColor="#000000" />
+            <RadioButton
+                android:id="@+id/btnBus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Bus"
+                android:textColor="#000000" />
 
-        <CheckBox
-            android:id="@+id/checkboxCar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/q3choices"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingStart="10dp"
-            android:text="@string/Car"
-            android:textColor="#000000" />
+            <RadioButton
+                android:id="@+id/btnJeep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Jeep"
+                android:textColor="#000000" />
 
-        <CheckBox
-            android:id="@+id/checkboxTric"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/q3choices"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingStart="10dp"
-            android:text="@string/Tricycle"
-            android:textColor="#000000" />
+            <RadioButton
+                android:id="@+id/btnCar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Car"
+                android:textColor="#000000" />
 
-        <CheckBox
-            android:id="@+id/checkboxMotor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/q3choices"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingStart="10dp"
-            android:text="@string/Motor"
-            android:textColor="#000000" />
-    </LinearLayout>
+            <RadioButton
+                android:id="@+id/btnTric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Tricycle"
+                android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/q1btn"
-        android:layout_width="84dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/q1btn"
-        android:fontFamily="@font/afacad"
-        android:text="@string/q1next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/CbxQ1" />
+            <RadioButton
+                android:id="@+id/btnMotor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Motor"
+                android:textColor="#000000" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/btnBike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Bikebtn"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/btnWalk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/q3choices"
+                android:fontFamily="@font/poppinsregular"
+                android:paddingStart="10dp"
+                android:text="@string/Walk"
+                android:textColor="#000000" />
+        </RadioGroup>
+
+
+
+        <Button
+            android:id="@+id/q1btn"
+            android:layout_width="84dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/q1btn"
+            android:fontFamily="@font/afacad"
+            android:text="@string/q1next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroupQ1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

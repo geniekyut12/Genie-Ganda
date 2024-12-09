@@ -4,5 +4,5 @@
     <corners android:radius="8dp" /> <!-- Rounded corners (optional) -->
     <stroke
         android:color="@color/Green"
-        android:width="2dp" /> <!-- Border color for the RadioButton -->
+        android:width="2dp" />
 </shape>

@@ -104,8 +104,9 @@ public class Register extends AppCompatActivity {
 
     // Helper method to validate names (only letters)
     private boolean isValidName(String name) {
-        return name.matches("^[a-zA-Z]+$");
+        return name.matches("^[a-zA-Z ]+$");
     }
+
 
     // Helper method to validate student ID (numbers and hyphens)
     private boolean isValidStudentId(String id) {
@@ -267,6 +268,46 @@ public class Register extends AppCompatActivity {
                 });
     }
 
+
+    private boolean validateInput(String username, String firstName, String lastName, String email, String password, String confirmPassword, String studentID) {
+        if (TextUtils.isEmpty(username) || username.length() < 3) {
+            txtUsername.setError("Username must be at least 3 characters long.");
+            txtUsername.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(firstName) || !isValidName(firstName)) {
+            txtFname.setError("First name must only contain letters and spaces.");
+            txtFname.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(lastName) || !isValidName(lastName)) {
+            txtLname.setError("Last name must only contain letters and spaces.");
+            txtLname.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(studentID) || !isValidStudentId(studentID)) {
+            studentId.setError("Student ID must be in the format 'XX-XXXX'.");
+            studentId.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(email) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            txtEmail.setError("Please provide a valid email.");
+            txtEmail.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(password) || password.length() < 8) {
+            txtpass.setError("Password must be at least 8 characters.");
+            txtpass.requestFocus();
+            return false;
+        }
+        if (!password.equals(confirmPassword)) {
+            txtconpass.setError("Passwords do not match.");
+            txtconpass.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     private void sendVerificationEmail(FirebaseUser user) {
         user.sendEmailVerification()
                 .addOnCompleteListener(task -> {
@@ -297,3 +338,4 @@ public class Register extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.w(TAG, "Error saving user profile", e));
     }
 }
+

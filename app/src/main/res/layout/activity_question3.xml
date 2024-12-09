@@ -87,7 +87,7 @@
         android:id="@+id/radioGroupOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
             android:background="@drawable/q3choices"
             android:text="@string/Rarely"
             android:fontFamily="@font/poppinsregular"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
 
@@ -121,7 +121,7 @@
             android:background="@drawable/q3choices"
             android:text="@string/SomeT"
             android:fontFamily="@font/poppinsregular"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
 
@@ -132,7 +132,7 @@
             android:background="@drawable/q3choices"
             android:text="@string/Often"
             android:fontFamily="@font/poppinsregular"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
 
@@ -143,7 +143,7 @@
             android:background="@drawable/q3choices"
             android:text="@string/Always"
             android:fontFamily="@font/poppinsregular"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
     </RadioGroup>

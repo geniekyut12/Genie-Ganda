@@ -58,8 +58,6 @@
             android:max="200"
             android:progress="120"
             style="?android:attr/progressBarStyleHorizontal" />
-
-
     </FrameLayout>
 
     <!-- Breakdown Section -->
@@ -86,7 +84,7 @@
         android:orientation="vertical"
         android:paddingTop="8dp">
 
-        <!-- First LinearLayout -->
+        <!-- First LinearLayout for Transportation -->
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
@@ -124,6 +122,7 @@
                 android:textColor="#000"
                 android:gravity="end" />
 
+
             <ImageView
                 android:id="@+id/arrowButton1"
                 android:layout_width="24dp"
@@ -137,7 +136,7 @@
                 app:tint="#000000" />
         </LinearLayout>
 
-        <!-- Second LinearLayout -->
+        <!-- Second LinearLayout for Food -->
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -188,7 +187,7 @@
                 app:tint="#000000" />
         </LinearLayout>
 
-        <!-- Third LinearLayout -->
+        <!-- Third LinearLayout for Food Waste -->
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"

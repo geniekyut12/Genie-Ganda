@@ -1,6 +1,7 @@
 package com.example.firstpage;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class homepage extends Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +47,7 @@ public class homepage extends Fragment {
         });
 
         // Set up the challenge button to navigate to RewardsFragment
-        Button challengeButton = view.findViewById(R.id.challengebtn);
+        Button challengeButton = view.findViewById(R.id.chllngBtn);
         challengeButton.setOnClickListener(v -> {
             // Navigate to RewardsFragment
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
@@ -57,8 +59,17 @@ public class homepage extends Fragment {
             fragmentTransaction.commit();
         });
 
+        // Set up the Learn More button to navigate to LearnMoreActivity
+        Button learnMoreButton = view.findViewById(R.id.learn_more_button);
+        learnMoreButton.setOnClickListener(v -> {
+            // Navigate to LearnMoreActivity
+            Intent intent = new Intent(getActivity(), LearnMore.class);
+            startActivity(intent);
+        });
+
         return view;
     }
+
 
     @Override
     public void onResume() {

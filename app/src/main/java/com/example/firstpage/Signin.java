@@ -33,8 +33,9 @@ import java.util.HashMap;
 public class Signin extends AppCompatActivity {
 
     private EditText txtEmail, LastPass;
-    private Button Loginbtn, google_sign_in_btn, forgotPassword;
+    private Button Loginbtn, google_sign_in_btn, btn_forgot_password;
     private ProgressBar progressBar;
+    private GoogleSignInOptions gso;
     private FirebaseAuth firebase;
     private FirebaseFirestore db;
     private GoogleSignInClient gsc;
@@ -50,56 +51,45 @@ public class Signin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        if (sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false)) {
-            navigateToLoadingPage();
+        boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
+
+        if (isLoggedIn) {
+            startActivity(new Intent(Signin.this, Loadingpage.class));
+            finish();
             return;
         }
 
         setContentView(R.layout.activity_signin);
 
-        initViews();
-        setupVideoBackground();
-        setupGoogleSignIn();
+        TextView registerTextView = findViewById(R.id.Register);
+        registerTextView.setOnClickListener(v -> startActivity(new Intent(Signin.this, Register.class)));
 
-        google_sign_in_btn.setOnClickListener(v -> signIn());
-        Loginbtn.setOnClickListener(v -> signUpUser());
-
-        // Forgot Password
-        forgotPassword.setOnClickListener(v -> showForgotPasswordDialog());
-    }
-
-    private void initViews() {
         txtEmail = findViewById(R.id.txtEmail);
         LastPass = findViewById(R.id.LastPass);
         Loginbtn = findViewById(R.id.btnLogIn);
         progressBar = findViewById(R.id.progressBar);
         google_sign_in_btn = findViewById(R.id.google_sign_in_btn);
+        btn_forgot_password = findViewById(R.id.btn_forgot_password);
         videoView = findViewById(R.id.videoViewBackground);
-        forgotPassword = findViewById(R.id.forgotPassword);
 
-        firebase = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
-        findViewById(R.id.Register).setOnClickListener(v ->
-                startActivity(new Intent(Signin.this, Register.class))
-        );
-    }
-
-    private void setupVideoBackground() {
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);
             videoView.start();
         });
-    }
 
-    private void setupGoogleSignIn() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        firebase = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        gsc = GoogleSignIn.getClient(this, gso);
+                .requestEmail().build();
+        gsc = GoogleSignIn.getClient(Signin.this, gso);
+
+        google_sign_in_btn.setOnClickListener(v -> signIn());
+        Loginbtn.setOnClickListener(v -> signUpUser());
+        btn_forgot_password.setOnClickListener(v -> showForgotPasswordDialog());
     }
 
     private void signIn() {
@@ -124,87 +114,89 @@ public class Signin extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
-        progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        firebase.signInWithCredential(credential).addOnCompleteListener(this, task -> {
-            progressBar.setVisibility(View.GONE);
-            if (task.isSuccessful()) {
-                handleSuccessfulLogin();
-            } else {
-                Toast.makeText(Signin.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+        firebase.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = firebase.getCurrentUser();
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("id", user.getUid());
+                        map.put("name", user.getDisplayName());
+                        map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+                        db.collection("users").document(user.getUid()).set(map);
 
-    private void handleSuccessfulLogin() {
-        FirebaseUser user = firebase.getCurrentUser();
-        if (user != null) {
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("id", user.getUid());
-            map.put("name", user.getDisplayName());
-            map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
-            db.collection("users").document(user.getUid()).set(map);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean(PREF_IS_LOGGED_IN, true);
+                        editor.apply();
 
-            sharedPreferences.edit().putBoolean(PREF_IS_LOGGED_IN, true).apply();
-            navigateToLoadingPage();
-        }
+                        startActivity(new Intent(Signin.this, Loadingpage.class));
+                        finish();
+                    } else {
+                        Toast.makeText(Signin.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void signUpUser() {
         String input = txtEmail.getText().toString().trim();
         String password = LastPass.getText().toString().trim();
 
-        if (validateInputs(input, password)) {
-            progressBar.setVisibility(View.VISIBLE);
-            if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
-                loginWithEmail(input, password);
-            } else {
-                queryUsername(input, password);
-            }
-        }
-    }
-
-    private boolean validateInputs(String input, String password) {
         if (TextUtils.isEmpty(input)) {
             txtEmail.setError("Email or username is required.");
             txtEmail.requestFocus();
-            return false;
+            return;
         }
         if (TextUtils.isEmpty(password)) {
             LastPass.setError("Password is required.");
             LastPass.requestFocus();
-            return false;
+            return;
         }
-        return true;
-    }
 
-    private void queryUsername(String username, String password) {
-        db.collection("users").whereEqualTo("username", username).get().addOnCompleteListener(task -> {
-            progressBar.setVisibility(View.GONE);
-            if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                String email = task.getResult().getDocuments().get(0).getString("email");
-                loginWithEmail(email, password);
-            } else {
-                txtEmail.setError("Username not found.");
-                txtEmail.requestFocus();
-            }
-        });
+        progressBar.setVisibility(View.VISIBLE);
+
+        if (Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
+            loginWithEmail(input, password);
+        } else {
+            db.collection("users")
+                    .whereEqualTo("username", input)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            String email = task.getResult().getDocuments().get(0).getString("email");
+                            loginWithEmail(email, password);
+                        } else {
+                            progressBar.setVisibility(View.GONE);
+                            txtEmail.setError("Username not found.");
+                            txtEmail.requestFocus();
+                        }
+                    });
+        }
     }
 
     private void loginWithEmail(String email, String password) {
-        firebase.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
-            progressBar.setVisibility(View.GONE);
-            if (task.isSuccessful()) {
-                handleSuccessfulLogin();
-            } else {
-                Toast.makeText(Signin.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+        firebase.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = firebase.getCurrentUser();
+                        if (user != null && user.isEmailVerified()) {
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean(PREF_IS_LOGGED_IN, true);
+                            editor.apply();
 
-    private void navigateToLoadingPage() {
-        startActivity(new Intent(Signin.this, Loadingpage.class));
-        finish();
+                            startActivity(new Intent(Signin.this, Loadingpage.class));
+                            finish();
+                        } else if (user != null && !user.isEmailVerified()) {
+                            Toast.makeText(Signin.this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
+                            firebase.signOut();
+                        } else {
+                            Toast.makeText(Signin.this, "User not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(Signin.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void showForgotPasswordDialog() {
@@ -217,11 +209,11 @@ public class Signin extends AppCompatActivity {
 
         builder.setPositiveButton("Send", (dialog, which) -> {
             String email = input.getText().toString().trim();
-            if (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                sendPasswordResetEmail(email);
-            } else {
-                Toast.makeText(Signin.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(Signin.this, "Enter a valid email", Toast.LENGTH_SHORT).show();
+                return;
             }
+            sendPasswordResetEmail(email);
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
@@ -230,13 +222,28 @@ public class Signin extends AppCompatActivity {
 
     private void sendPasswordResetEmail(String email) {
         progressBar.setVisibility(View.VISIBLE);
-        firebase.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
-            progressBar.setVisibility(View.GONE);
-            if (task.isSuccessful()) {
-                Toast.makeText(Signin.this, "Reset email sent to " + email, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(Signin.this, "Error sending reset email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        firebase.sendPasswordResetEmail(email)
+                .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Signin.this, "Reset email sent successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String error = task.getException() != null ? task.getException().getMessage() : "Error occurred";
+                        Toast.makeText(Signin.this, "Error sending reset email: " + error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void logoutUser() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(PREF_IS_LOGGED_IN, false);
+        editor.apply();
+
+        firebase.signOut();
+        gsc.signOut().addOnCompleteListener(this, task -> {
+            Intent intent = new Intent(Signin.this, Signin.class);
+            startActivity(intent);
+            finish();
         });
     }
 }

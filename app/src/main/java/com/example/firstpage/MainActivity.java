@@ -14,20 +14,30 @@ public class MainActivity extends AppCompatActivity {
     private Button getstartbtn;
     private static final String PREFS_NAME = "loginPrefs";
     private static final String PREF_IS_LOGGED_IN = "isLoggedIn";
+    private static final String PREF_HAS_COMPLETED_ONBOARDING = "hasCompletedOnboarding";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check if user is logged in
+        // Access SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
 
-        // If logged in, start Loadingpage and finish MainActivity
+        // Check if user is logged in and has completed onboarding
+        boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
+        boolean hasCompletedOnboarding = sharedPreferences.getBoolean(PREF_HAS_COMPLETED_ONBOARDING, false);
+
         if (isLoggedIn) {
-            Intent intent = new Intent(MainActivity.this,Questions.class);
-            startActivity(intent);
-            finish();
+            if (hasCompletedOnboarding) {
+                // Redirect to navbar if onboarding is complete
+                Intent intent = new Intent(MainActivity.this, navbar.class);
+                startActivity(intent);
+            } else {
+                // Redirect to onboarding questions if not complete
+                Intent intent = new Intent(MainActivity.this, Questions.class);
+                startActivity(intent);
+            }
+            finish();  // Stop MainActivity
             return;
         }
 
@@ -50,5 +60,4 @@ public class MainActivity extends AppCompatActivity {
             videoView.start();
         });
     }
-
 }

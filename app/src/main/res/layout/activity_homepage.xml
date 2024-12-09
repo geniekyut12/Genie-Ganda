@@ -27,11 +27,12 @@
                 android:text="@string/what"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:fontFamily="@font/publicsans_bold"
+                android:fontFamily="@font/poppins_bold"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <!-- Horizontal ScrollView for the first set of boxes -->
             <HorizontalScrollView
                 android:layout_width="wrap_content"
@@ -54,17 +55,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Increase Image Size -->
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/bike" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-20dp"
+                            android:layout_marginTop="80dp"
                             android:text="@string/bike"
                             android:textAlignment="center"
                             android:textSize="20sp"
@@ -79,8 +73,8 @@
                             android:text="@string/bikes"
                             android:textAlignment="center"
                             android:textColor="@color/LTGreen"
-                            android:fontFamily="@font/publicsans_reg"
-                            android:textSize="10sp" />
+                            android:fontFamily="@font/publicsans_semibold"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <!-- Third Box (Example continuation) -->
@@ -94,17 +88,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Increase Image Size -->
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/changewhatyoueat" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="80dp"
                             android:text="@string/eat"
                             android:textAlignment="center"
                             android:textSize="16sp"
@@ -118,8 +105,8 @@
                             android:text="@string/eats"
                             android:textAlignment="center"
                             android:textColor="@color/LTGreen"
-                            android:fontFamily="@font/publicsans_reg"
-                            android:textSize="10sp"/>
+                            android:fontFamily="@font/publicsans_semibold"
+                            android:textSize="12sp"/>
 
 
                     </LinearLayout>
@@ -134,17 +121,10 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <!-- Increase Image Size -->
-                        <ImageView
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/reducefoodwaste" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="70dp"
                             android:text="@string/wastes"
                             android:textAlignment="center"
                             android:textSize="16sp"
@@ -155,11 +135,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="@string/wastess"
+                            android:text="@string/fwastes"
                             android:textAlignment="center"
                             android:textColor="@color/LTGreen"
-                            android:fontFamily="@font/publicsans_reg"
-                            android:textSize="10sp"/>
+                            android:fontFamily="@font/publicsans_semibold"
+                            android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- Add more boxes as needed -->
                 </LinearLayout>
@@ -174,26 +154,26 @@
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/publicsans_bold"/>
+                android:fontFamily="@font/poppins_bold"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:text="@string/enterprise"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/publicsans_bold"/>
+                android:fontFamily="@font/poppins_semibold_italic"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/homepagedesc"
                 android:textColor="#000000"
-                android:textSize="10sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"/>
 
             <!-- Enterprises Section -->
             <HorizontalScrollView
@@ -307,7 +287,8 @@
                 android:gravity="center"
                 android:text="@string/cverde"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:fontFamily="@font/poppinsregular"/>
 
             <!-- Learn More Button -->
             <Button
@@ -315,26 +296,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
                 android:padding="0dp"
                 android:text="@string/learn"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold"
                 android:onClick="navigateToNextPage" />
 
             <Button
-                android:id="@+id/challengebtn"
-                android:layout_width="352dp"
-                android:layout_height="38dp"
+                android:id="@+id/chllngBtn"
+                android:layout_width="347dp"
+                android:layout_height="47dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/challengebtn1"
-                android:onClick="navigateToNextPage1"
+                android:onClick="navigateToNextPage"
                 android:padding="0dp"
                 android:text="@string/challenge_home"
                 android:textColor="@color/LTGreen"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_semibold_italic"/>
+
+
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

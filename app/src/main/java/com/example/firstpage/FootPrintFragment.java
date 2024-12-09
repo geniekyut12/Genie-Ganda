@@ -15,9 +15,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class FootPrintFragment extends Fragment {
 
@@ -40,28 +41,31 @@ public class FootPrintFragment extends Fragment {
         ImageView arrowButton1 = view.findViewById(R.id.arrowButton1);
         ImageView arrowButton2 = view.findViewById(R.id.arrowButton2);
         ImageView arrowButton3 = view.findViewById(R.id.arrowButton3);
+        TextView co1 = view.findViewById(R.id.co1); // TextView for transportation data
 
         // Retrieve the currently logged-in user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
-            Log.d(TAG, "User ID: " + userId);
+            String username = user.getDisplayName(); // Assuming the username is available as display name
+            Log.d(TAG, "User ID: " + userId + ", Username: " + username);
 
-            // Reference to the user's data in Firestore
+            // Initialize Firestore once
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference userRef = db.collection("users").document(userId);
 
-            // Retrieve first and last name
-            userRef.get().addOnCompleteListener(task -> {
+            // Reference to the user's data in the "users" collection to get firstName and lastName
+            db.collection("users").document(userId).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document != null && document.exists()) {
                         String firstName = document.getString("firstName");
                         String lastName = document.getString("lastName");
 
+                        // Log the first name and last name to verify they are being retrieved correctly
                         Log.d(TAG, "First Name: " + firstName);
                         Log.d(TAG, "Last Name: " + lastName);
 
+                        // Set the name in the header
                         if (firstName != null && lastName != null) {
                             headerText.setText("Hello, " + firstName + " " + lastName);
                         } else {
@@ -77,8 +81,43 @@ public class FootPrintFragment extends Fragment {
                     headerText.setText("Hello, User");
                 }
             });
+
+            // Fetch carbon footprint data for the logged-in user based on username
+            db.collection("carbon_footprints")
+                    .whereEqualTo("username", username)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                for (QueryDocumentSnapshot document : querySnapshot) {
+                                    // Get the data from the document
+                                    String transportationDetails = document.getString("Question1");
+                                    Double carbonFootprint = document.getDouble("carbonFootprint");
+
+                                    // Log the retrieved data
+                                    Log.d(TAG, "Transportation Details: " + transportationDetails);
+                                    Log.d(TAG, "Carbon Footprint: " + carbonFootprint);
+
+                                    // Set the carbon footprint in the TextView
+                                    if (carbonFootprint != null && transportationDetails != null) {
+                                        co1.setText("Transportation: " + transportationDetails + " - CO2: " + carbonFootprint + " kg");
+                                    } else {
+                                        co1.setText("No transportation data available.");
+                                    }
+                                }
+                            } else {
+                                co1.setText("No transportation data available.");
+                            }
+                        } else {
+                            Log.e(TAG, "Error retrieving carbon footprint data: " + task.getException());
+                            co1.setText("Error retrieving data.");
+                        }
+                    });
+
         } else {
             headerText.setText("Hello, Guest");
+            co1.setText("No transportation data available.");
             Log.e(TAG, "User is not logged in");
         }
 

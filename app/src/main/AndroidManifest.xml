@@ -15,10 +15,10 @@
         android:theme="@style/Theme.Firstpage"
         tools:targetApi="34">
         <activity
-            android:name=".Question1_2"
+            android:name=".Chall1"
             android:exported="false" />
         <activity
-            android:name=".Question1_1"
+            android:name=".Challenges"
             android:exported="false" />
         <activity
             android:name=".RewardTwo"

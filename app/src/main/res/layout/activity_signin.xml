@@ -72,12 +72,11 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/forgotPassword"
+                android:id="@+id/btn_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="43dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="35dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/afacad"

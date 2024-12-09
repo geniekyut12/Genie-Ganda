@@ -12,4 +12,6 @@
         <color name="RBBG"> #F8FFF5</color>
         <color name="mainbg"> #F9FFF1</color>
         <color name="entsoc"> #452C13</color>
+        <color name="black"> #000000 </color>
+        <color name="BrightGreen"> #1A8433</color>
 </resources>

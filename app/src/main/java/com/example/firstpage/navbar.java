@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class navbar extends AppCompatActivity {
@@ -38,9 +39,9 @@ public class navbar extends AppCompatActivity {
             } else if (item.getItemId() == R.id.nav_home) {
                 selectedFragment = new homepage();
                 selectedItemId = R.id.nav_home;
-            } else if (item.getItemId() == R.id.nav_rewards) {
-                selectedFragment = new RewardsFragment();
-                selectedItemId = R.id.nav_rewards;
+            } else if (item.getItemId() == R.id.nav_challenges) {
+                selectedFragment = new ChallengeFragment();
+                selectedItemId = R.id.nav_challenges;
             } else if (item.getItemId() == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
                 selectedItemId = R.id.nav_profile;

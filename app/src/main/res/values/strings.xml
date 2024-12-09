@@ -43,7 +43,7 @@
     <string name="question2">"How many meals do you consume on campus\n per week? (in kg.)</string>
     <string name="question3">" How often do you leave food uneaten or discard leftovers?\n(in kg.)</string>
     <string name="WTG">WAY TO GO!</string>
-    <string name="guideRB">Drag the slider to proceed.</string>
+    <string name="guideRB">Drag the slider to proceed</string>
     <string name="questionoften">1 - Never\n2 - Rarely\n3 - Sometimes\n4 - Often\n5 - Always</string>
     <string name="student_id">Student Number</string>
     <string name="Never">Never</string>
@@ -89,14 +89,14 @@
     <string name="guideq3">Choose one to continue</string>
     <string name="foodlogo" />
     <string name="challanges">Challanges</string>
-    <string name="SemiQq1">Choose you mode of transportation/s</string>
+    <string name="SemiQq1">Select your primary mode of transportation</string>
     <string name="Bus">Bus</string>
     <string name="Jeep">Jeep</string>
     <string name="Car">Car</string>
     <string name="Motor">Motorcycle</string>
     <string name="Tricycle">Tricycle</string>
     <string name="q1next">Next</string>
-    <string name="subtitle">Start by answering a few questions. \nYour responses will give us a rough estimate of your carbon emissions. \n\nRemember, there are no right or wrong answers. It’s not about \nperfection but about guiding your next steps for action. \n\nReady?</string>
+    <string name="subtitle">Start by answering a few questions. \nYour responses will give us a rough estimate of your carbon emissions. \n\nRemember, there are no right or wrong answers. It’s not about perfection \nbut about guiding your next steps for action. \n\nReady?</string>
 
     <string name="WTGnote">Thank you for your answers! \nYour insights will help us understand your \nimpact and guide you in reducing\n your carbon footprint. \n\nLet’s keep making a difference together!</string>
     <string name="savequest">Save Changes</string>
@@ -124,7 +124,6 @@
     <string name="playmtitle">Playmaker Enterprise</string>
     <string name="jackofpie">“Langka-Tulad, Langka-Pantay at \nLangkasing-Sarap na Jack of Pie”</string>
     <string name="playmdesc">Playmaker Enterprise is established by a group of students from Quezon City University, pursuing a Bachelor of Science in Entrepreneurship, with a shared vision and determination to make a meaningful impact in the culinary landscape. Drawing upon their academic background and passion for entrepreneurship, the students saw an opportunity to leverage their skills and creativity to create a business that not only generates profits but also makes a positive difference in their community.\n\nWith a focus on serving delicious pies infused with the unique flavors of jackfruit, the students recognized the potential to introduce something innovative and distinctive to the market. Their choice of jackfruit as a main ingredient reflects not only their desire to offer something unexpected and delightful but also their commitment to supporting local agriculture and promoting sustainability.</string>
-    <string name="abouts">"         C-Verde is an innovative mobile application designed to help individuals monitor and reduce their carbon footprint in an accessible way. By tracking daily activities like transportation, electricity usage, food consumption, and waste generation, \nC-Verde provides users with valuable insights into their environmental impact and encourages sustainable practices. Through its intuitive interface, users can enter data about their routines, and the app calculates their carbon footprint, giving a clear overview of the environmental impact of their actions. With tailored recommendations on how to reduce emissions and adopt eco-friendly habits. C-Verde empowers users to make informed decisions and take actionable steps toward a more sustainable lifestyle. In addition to tracking emissions, C-Verde offers challenges and tasks that motivate users to reduce their carbon footprint. Successful completion of these challenges rewards users with vouchers, encouraging continued engagement and improvement in sustainability efforts. These rewards come from enterprises that align with C-Verde's mission of promoting environmental sustainability.\nC-Verde’s ultimate goal is to create a community of QCU students who actively contribute to reducing global carbon emissions. The app is designed to be user-friendly and accessible, making sustainability easy to integrate into everyday life. \nBy providing feedback and tailored suggestions, C-Verde helps users adopt greener habits that can have a lasting positive impact on the environment. \nWith a focus on privacy, C-Verde ensures that all personal data is securely stored and never shared with third parties without user consent. The app’s features are continually updated to improve functionality and offer even more ways for users to reduce their environmental impact. C-Verde is not just an app; it’s a movement towards a more sustainable future. Whether you’re looking to make a small change or completely overhaul your lifestyle, C-Verde provides the tools and motivation to make a difference.\n"</string>
     <string name="challenge_home">Challenge yourself now!</string>
     <string name="homepagedesc">C-Verde collaborates with Masugid, Wani, and Playmaker to promote sustainability through user engagement. Users can earn discounts or vouchers by participating in challenges and when users reach specific carbon emission reduction goals. The potential larger discounts are redeemable green products from the enterprises.</string>
 
@@ -148,5 +147,52 @@
     <string name="totalcarbon">0.00 g CO₂</string>
     <string name="Walk">Walking</string>
     <string name="Bikebtn">Bike</string>
+    <string name="log_out">LOGOUT</string>
+    <string name="aboutcv">About\nC-Verde</string>
+    <string name="cv_fb">C-Verde</string>
+    <string name="cv_email">c.verde0101@gmail.com</string>
+    <string name="cv_gmail">\n</string>
+    <string name="cvpic">\n</string>
+    <string name="cv_des">\n</string>
+    <string name="abouts">" C-Verde is an innovative mobile application designed to help individuals monitor and reduce their carbon footprint in an accessible way. By tracking daily activities like transportation, electricity usage, food consumption, and waste generation, "</string>
+    <string name="pics">\n</string>
+    <string name="fwastes"><![CDATA[To reduce food waste, start by planning your meals and creating a grocery list to avoid impulse buys. Store food properly in airtight containers, and label leftovers with dates. Practice portion control when serving meals and get creative with leftovers.]]></string>
+    <string name="challengesM">Your Challenges</string>
+    <string name="challengesD">Take daily actions to reduce your carbon footprint, earn rewards for each completed challenge, and build sustainable habits. Let’s create a greener future together!</string>
+    <string name="inprogress">In Progress</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    *
+
+
+    <string name="completed">COMPLETED</string>
+    <string name="day2">Day 2:  Unplug for Energy Savings</string>
+    <string name="day1text">Challenge Goal: Reduce your carbon footprint by choosing plant-based meals instead of meat.</string>
+    <string name="day1">Day 1: Go Meatless for One Day!</string>
+    <string name="start">Start Challenge</string>
+    <string name="day2text">Challenge Goal: Unplug electronics when not in use to reduce energy waste.</string>
+    <string name="day3">Day 3: Carry a Reusable Water Bottle</string>
+    <string name="day3text">Challenge Goal: Use a reusable water bottle instead of buying plastic ones..</string>
+    <string name="day4">Day 4:  Plan a Zero-Waste Meal</string>
+    <string name="day4text">Challenge Goal: Use ingredients you already have at home to prepare a mea</string>
+    <string name="day5">Day 5:  Digital Declutter</string>
+    <string name="day5text">Challenge Goal: Delete old emails and files from your devices and cloud storage.</string>
+    <string name="done">DONE</string>
+    <string name="Later">Later</string>
+    <string name="fooddisc">Eating plant-based meals instead of meat significantly reduces greenhouse gas emissions, conserves water, and lowers energy use associated with food production. By opting for plant-based alternatives, you can make a tangible positive impact on the environment while exploring diverse, nutritious, and delicious food options.</string>
+    <string name="carbstotal">-10 kg CO2 (-0.21% of your footprint)</string>
+    <string name="complete">COMPLETED</string>
+    <string name="challenge">Challenges</string>
+    <string name="earthhome">"\nYou've successfully completed Day One of the challenge and earned points. Thank you for making the effort to stay green! "</string>
+    <string name="co2">-10 kg CO2</string>
+    <string name="day2texts">Many electronics continue to consume energy even when turned off, a phenomenon known as \"phantom\" or \"standby\" power. By unplugging devices such as chargers, appliances, and entertainment systems when they’re not in use, you can significantly cut down on unnecessary energy consumption, lower your carbon footprint, and save on electricity bills. This simple habit can make a big difference in reducing overall energy waste.\n\nThis challenge helps build sustainable habits while contributing to energy conservation and reducing unnecessary environmental impact.</string>
+    <string name="day3texts">Single-use plastic water bottles contribute significantly to pollution and landfill waste, taking hundreds of years to decompose. By switching to a reusable water bottle, you reduce plastic waste, minimize your carbon footprint, and help conserve resources. It’s an easy and effective way to stay hydrated while supporting a more sustainable lifestyle.\n\nThis challenge not only reduces plastic waste but also encourages healthier hydration habits.</string>
+    <string name="day4texts">Instead of buying takeout or extra groceries, this challenge encourages you to get creative with what’s already in your pantry, fridge, or freezer. Not only does this reduce food waste and save money, but it also promotes resourcefulness and helps you discover new ways to combine ingredients. By using what you have on hand, you can create delicious, budget-friendly meals while minimizing your environmental footprint.\n\nThis challenge helps you minimize food waste, save money, and make the most of what’s already in your kitchen.</string>
+    <string name="day5texts">Over time, old emails and files accumulate, taking up unnecessary space on your devices and cloud storage. By organizing and deleting outdated or unused files, you can improve device performance, make it easier to find important information, and reduce your digital footprint. This challenge encourages digital decluttering, helping you stay organized while contributing to more efficient use of storage resources.\n\nThis challenge helps you maintain a cleaner, more organized digital environment while improving device efficiency and security.</string>
+    <string name="Warn_Img">\n</string>
+    <string name="q1pop">Your actions are harming the environment. But it’s never too late to make a positive change! Start by taking on these daily challenges.</string>
+    <string name="ok">OK</string>
+
 
 </resources>
