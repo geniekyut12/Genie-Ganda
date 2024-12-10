@@ -14,31 +14,21 @@ public class MainActivity extends AppCompatActivity {
     private Button getstartbtn;
     private static final String PREFS_NAME = "loginPrefs";
     private static final String PREF_IS_LOGGED_IN = "isLoggedIn";
-    private static final String PREF_HAS_COMPLETED_ONBOARDING = "hasCompletedOnboarding";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Access SharedPreferences
+        // Check if user is logged in
         SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        // Check if user is logged in and has completed onboarding
         boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
-        boolean hasCompletedOnboarding = sharedPreferences.getBoolean(PREF_HAS_COMPLETED_ONBOARDING, false);
 
+        // If logged in, start navbar (or any other screen) and finish MainActivity
         if (isLoggedIn) {
-            if (hasCompletedOnboarding) {
-                // Redirect to navbar if onboarding is complete
-                Intent intent = new Intent(MainActivity.this, navbar.class);
-                startActivity(intent);
-            } else {
-                // Redirect to onboarding questions if not complete
-                Intent intent = new Intent(MainActivity.this, navbar.class);
-                startActivity(intent);
-            }
-            finish();  // Stop MainActivity
-            return;
+            Intent intent = new Intent(MainActivity.this, navbar.class);
+            startActivity(intent);
+            finish();
+            return;  // Stop here if the user is logged in
         }
 
         // If not logged in, show MainActivity layout

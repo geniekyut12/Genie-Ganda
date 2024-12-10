@@ -208,6 +208,10 @@
     <string name="Savechanges">Save Changes</string>
     <string name="TAC"><![CDATA[Terms & Condition]]></string>
     <string name="DelAcc">Delete My Account</string>
+    <string name="editprof">Edit Profile</string>
+    <string name="accsett">Account Settings</string>
+    <string name="Usernames">Genie</string>
+    <string name="EmailSample">estebangenie12@gmail.com</string>
 
 
 </resources>

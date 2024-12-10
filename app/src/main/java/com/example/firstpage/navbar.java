@@ -1,85 +1,91 @@
 package com.example.firstpage;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.Stack;
 
 public class navbar extends AppCompatActivity {
 
-    private int selectedItemId = R.id.nav_home;
+    private BottomNavigationView bottomNavigationView;
+    private final Stack<Integer> fragmentStack = new Stack<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navbar);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
-        String fragmentToLoad = getIntent().getStringExtra("fragment_to_load");
-
+        // Load the default fragment (HomeFragment)
         if (savedInstanceState == null) {
-            if ("footprint".equals(fragmentToLoad)) {
-                loadFragment(new FootPrintFragment(), false);
-                selectedItemId = R.id.nav_footprint;
-            } else {
-                loadFragment(new FootPrintFragment(), false);
-                selectedItemId = R.id.nav_footprint;
-            }
+            loadFragment(new homepage(), R.id.nav_home);
         }
 
+        // Handle bottom navigation item selection
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
 
-            if (item.getItemId() == R.id.nav_footprint) {
-                selectedFragment = new FootPrintFragment();
-                selectedItemId = R.id.nav_footprint;
-            } else if (item.getItemId() == R.id.nav_home) {
+            // Avoid reloading the current fragment
+            if (!fragmentStack.isEmpty() && fragmentStack.peek() == itemId) {
+                return true;
+            }
+
+            Fragment selectedFragment = null;
+            if (itemId == R.id.nav_home) {
                 selectedFragment = new homepage();
-                selectedItemId = R.id.nav_home;
-            } else if (item.getItemId() == R.id.nav_challenges) {
+            } else if (itemId == R.id.nav_footprint) {
+                selectedFragment = new FootPrintFragment();
+            } else if (itemId == R.id.nav_challenges) {
                 selectedFragment = new ChallengeFragment();
-                selectedItemId = R.id.nav_challenges;
-            } else if (item.getItemId() == R.id.nav_profile) {
+            } else if (itemId == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
-                selectedItemId = R.id.nav_profile;
-            } else {
-                return false;
             }
 
             if (selectedFragment != null) {
-                loadFragment(selectedFragment, true);
+                loadFragment(selectedFragment, itemId);
             }
 
-            for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
-                bottomNavigationView.getMenu().getItem(i).getIcon().setTint(Color.GRAY);
-            }
-
-            item.getIcon().setTint(Color.parseColor("#90EE90"));
             return true;
         });
-
-        bottomNavigationView.setSelectedItemId(selectedItemId);
     }
 
-    private void loadFragment(Fragment fragment, boolean addToBackStack) {
-        androidx.fragment.app.FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment);
+    private void loadFragment(Fragment fragment, int itemId) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
 
-        if (addToBackStack) {
-            transaction.addToBackStack(null);
+        // Add the selected fragment to the stack
+        if (!fragmentStack.isEmpty() && fragmentStack.peek() == itemId) {
+            return; // Prevent duplicate entries
         }
-
-        transaction.commit();
+        fragmentStack.push(itemId);
     }
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        if (fragmentStack.size() > 1) {
+            fragmentStack.pop(); // Remove the current fragment
+            int previousItemId = fragmentStack.peek();
+
+            Fragment previousFragment = null;
+            if (previousItemId == R.id.nav_home) {
+                previousFragment = new homepage();
+            } else if (previousItemId == R.id.nav_footprint) {
+                previousFragment = new FootPrintFragment();
+            } else if (previousItemId == R.id.nav_challenges) {
+                previousFragment = new RewardsFragment();
+            } else if (previousItemId == R.id.nav_profile) {
+                previousFragment = new ProfileFragment();
+            }
+
+            if (previousFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, previousFragment)
+                        .commit();
+                bottomNavigationView.setSelectedItemId(previousItemId);
+            }
         } else {
             super.onBackPressed();
         }
