@@ -39,7 +39,7 @@
     <string name="nextbtn">Next</string>
     <string name="Efan">Electricfan(s)</string>
     <string name="Ac">Aircondition(s)</string>
-    <string name="question1">"Your daily calculated distance \nfrom home to Quezon City \nUniversity (in km.)</string>
+    <string name="question1">"Your daily calculated distance from home to Quezon City University </string>
     <string name="question2">"How many meals do you consume on campus\n per week? (in kg.)</string>
     <string name="question3">" How often do you leave food uneaten or discard leftovers?\n(in kg.)</string>
     <string name="WTG">WAY TO GO!</string>
@@ -86,7 +86,7 @@
     <string name="masugid_icon" />
     <string name="masugident">Masugid Enterprise</string>
     <string name="q1">\n</string>
-    <string name="guideq3">Choose one to continue</string>
+    <string name="guideq3">Select one to continue</string>
     <string name="foodlogo" />
     <string name="challanges">Challanges</string>
     <string name="SemiQq1">Select your primary mode of transportation</string>
@@ -211,7 +211,7 @@
     <string name="editprof">Edit Profile</string>
     <string name="accsett">Account Settings</string>
     <string name="Usernames">Genie</string>
-    <string name="EmailSample">estebangenie12@gmail.com</string>
+    <string name="EmailSample">esteban.genievibs.12122002@gmail.com</string>
 
 
 </resources>

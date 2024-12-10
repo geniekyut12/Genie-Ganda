@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BGreen"
+    android:background="@color/quesbg"
     android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@
             android:id="@+id/questionText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="45dp"
             android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             android:text="@string/question1"
@@ -114,7 +114,7 @@
             android:id="@+id/SemiQ1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             android:text="@string/SemiQq1"
@@ -211,13 +211,12 @@
         </RadioGroup>
 
 
-
         <Button
             android:id="@+id/q1btn"
-            android:layout_width="84dp"
-            android:layout_height="35dp"
+            android:layout_width="110dp"
+            android:layout_height="41dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/q1btn"
+            android:background="@drawable/calculate"
             android:fontFamily="@font/afacad"
             android:text="@string/q1next"
             app:layout_constraintEnd_toEndOf="parent"

@@ -94,7 +94,7 @@ public class Register extends AppCompatActivity {
         });
 
         VideoView videoView = findViewById(R.id.videoViewBackground);
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mbgblur);
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);

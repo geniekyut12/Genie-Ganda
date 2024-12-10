@@ -83,7 +83,7 @@ public class Signin extends AppCompatActivity {
         google_sign_in_btn = findViewById(R.id.google_sign_in_btn);
         videoView = findViewById(R.id.videoViewBackground);
 
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mbgblur);
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);

@@ -36,7 +36,7 @@ public class Loadingpage extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
 
         // Set up VideoView with background video
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mbgblur);
         videoView.setVideoURI(uri);
         videoView.setOnPreparedListener(mp -> {
             mp.setLooping(true);
@@ -49,7 +49,7 @@ public class Loadingpage extends AppCompatActivity {
 
     private void redirectToHomepage() {
         if (!isFinishing()) {
-            Intent intent = new Intent(Loadingpage.this, navbar.class);
+            Intent intent = new Intent(Loadingpage.this, Questions.class);
             startActivity(intent);
             finish();
         }

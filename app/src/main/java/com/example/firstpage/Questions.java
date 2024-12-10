@@ -87,7 +87,7 @@ public class Questions extends AppCompatActivity {
         editor.apply();
 
         // Redirect to the Homepage activity
-        Intent intent = new Intent(Questions.this, navbar.class);
+        Intent intent = new Intent(Questions.this, Question1.class);
         startActivity(intent);
         finish();
     }

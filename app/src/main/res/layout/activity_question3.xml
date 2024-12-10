@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ABC992"
+    android:background="@color/quesbg"
     android:padding="16dp">
 
     <!-- Header with ImageView and TextView -->
@@ -150,10 +150,10 @@
 
     <Button
         android:id="@+id/q3btn"
-        android:layout_width="84dp"
-        android:layout_height="35dp"
+        android:layout_width="101dp"
+        android:layout_height="41dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/q1btn"
+        android:background="@drawable/calculate"
         android:fontFamily="@font/afacad"
         android:text="@string/q1next"
         app:layout_constraintEnd_toEndOf="parent"
