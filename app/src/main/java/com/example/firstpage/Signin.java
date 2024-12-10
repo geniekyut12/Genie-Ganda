@@ -1,10 +1,12 @@
 package com.example.firstpage;
 
+// Android imports
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+// AndroidX
 import androidx.appcompat.app.AppCompatActivity;
 
+// Google Sign-In
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
+
+// Firebase
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,12 +35,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+// Java utilities
 import java.util.HashMap;
 
 public class Signin extends AppCompatActivity {
 
     private EditText txtEmail, LastPass;
-    private Button Loginbtn, google_sign_in_btn, btn_forgot_password;
+    private Button Loginbtn, google_sign_in_btn;
     private ProgressBar progressBar;
     private GoogleSignInOptions gso;
     private FirebaseAuth firebase;
@@ -53,7 +61,7 @@ public class Signin extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean(PREF_IS_LOGGED_IN, false);
 
-        if (isLoggedIn) {
+        if (isLoggedIn && !getIntent().hasExtra("skipAutoLogin")) {
             startActivity(new Intent(Signin.this, Loadingpage.class));
             finish();
             return;
@@ -62,14 +70,17 @@ public class Signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         TextView registerTextView = findViewById(R.id.Register);
-        registerTextView.setOnClickListener(v -> startActivity(new Intent(Signin.this, Register.class)));
+        registerTextView.setOnClickListener(v -> {
+            Intent registerIntent = new Intent(Signin.this, Register.class);
+            registerIntent.putExtra("skipAutoLogin", true);
+            startActivity(registerIntent);
+        });
 
         txtEmail = findViewById(R.id.txtEmail);
         LastPass = findViewById(R.id.LastPass);
         Loginbtn = findViewById(R.id.btnLogIn);
         progressBar = findViewById(R.id.progressBar);
         google_sign_in_btn = findViewById(R.id.google_sign_in_btn);
-        btn_forgot_password = findViewById(R.id.btn_forgot_password);
         videoView = findViewById(R.id.videoViewBackground);
 
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.mainbg);
@@ -84,12 +95,12 @@ public class Signin extends AppCompatActivity {
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail().build();
+                .requestEmail()
+                .build();
         gsc = GoogleSignIn.getClient(Signin.this, gso);
 
         google_sign_in_btn.setOnClickListener(v -> signIn());
         Loginbtn.setOnClickListener(v -> signUpUser());
-        btn_forgot_password.setOnClickListener(v -> showForgotPasswordDialog());
     }
 
     private void signIn() {
@@ -105,36 +116,56 @@ public class Signin extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
+                if (account != null && account.getIdToken() != null) {
+                    firebaseAuthWithGoogle(account.getIdToken());
+                } else {
+                    Log.e("Google Sign-In", "ID Token is null or account is null");
+                    Toast.makeText(this, "Google Sign-In failed. Please try again.", Toast.LENGTH_SHORT).show();
+                }
             } catch (ApiException e) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Google Sign-In", "Sign-in failed. Status Code: " + e.getStatusCode(), e);
+                Toast.makeText(this, "Google Sign-In failed: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
+        progressBar.setVisibility(View.VISIBLE);
+
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebase.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         FirebaseUser user = firebase.getCurrentUser();
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("id", user.getUid());
-                        map.put("name", user.getDisplayName());
-                        map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
-                        db.collection("users").document(user.getUid()).set(map);
+                        if (user != null) {
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("id", user.getUid());
+                            map.put("name", user.getDisplayName());
+                            map.put("profile", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+                            db.collection("users").document(user.getUid()).set(map)
+                                    .addOnSuccessListener(aVoid -> {
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putBoolean(PREF_IS_LOGGED_IN, true);
+                                        editor.apply();
 
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean(PREF_IS_LOGGED_IN, true);
-                        editor.apply();
-
-                        startActivity(new Intent(Signin.this, Loadingpage.class));
-                        finish();
+                                        startActivity(new Intent(Signin.this, Loadingpage.class));
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e("Firestore", "Error saving user data: " + e.getMessage());
+                                        Toast.makeText(Signin.this, "Database error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        }
                     } else {
+                        Log.e("Google Sign-In", "Authentication failed: " + task.getException());
                         Toast.makeText(Signin.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    Log.e("Google Sign-In", "Sign-In failed: " + e.getMessage());
+                    Toast.makeText(Signin.this, "Google Sign-In failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -197,53 +228,5 @@ public class Signin extends AppCompatActivity {
                         Toast.makeText(Signin.this, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void showForgotPasswordDialog() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
-        builder.setTitle("Forgot Password");
-
-        final EditText input = new EditText(this);
-        input.setHint("Enter your email");
-        builder.setView(input);
-
-        builder.setPositiveButton("Send", (dialog, which) -> {
-            String email = input.getText().toString().trim();
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(Signin.this, "Enter a valid email", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            sendPasswordResetEmail(email);
-        });
-
-        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.show();
-    }
-
-    private void sendPasswordResetEmail(String email) {
-        progressBar.setVisibility(View.VISIBLE);
-        firebase.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    progressBar.setVisibility(View.GONE);
-                    if (task.isSuccessful()) {
-                        Toast.makeText(Signin.this, "Reset email sent successfully", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String error = task.getException() != null ? task.getException().getMessage() : "Error occurred";
-                        Toast.makeText(Signin.this, "Error sending reset email: " + error, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    public void logoutUser() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(PREF_IS_LOGGED_IN, false);
-        editor.apply();
-
-        firebase.signOut();
-        gsc.signOut().addOnCompleteListener(this, task -> {
-            Intent intent = new Intent(Signin.this, Signin.class);
-            startActivity(intent);
-            finish();
-        });
     }
 }

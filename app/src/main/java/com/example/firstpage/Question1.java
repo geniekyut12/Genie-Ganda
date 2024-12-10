@@ -78,101 +78,88 @@ public class Question1 extends AppCompatActivity {
             }
         });
 
-        nextButton.setOnClickListener(v -> {
-            int selectedId = radioGroupQ1.getCheckedRadioButtonId();
+        // Set up the Next button listener
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Reset the total carbon footprint
+                totalCarbonFootprint = 0.0;
 
-            // Check if a transportation method is selected
-            if (selectedId == -1) {
-                // No RadioButton selected
-                Log.d("Question1", "No transportation selected");
-                Toast.makeText(Question1.this, "Please select a transportation method.", Toast.LENGTH_SHORT).show();
-                return; // Exit early if no selection is made
-            }
-
-            // Get the selected transportation method
-            RadioButton selectedRadioButton = findViewById(selectedId);
-            String selectedTransport = selectedRadioButton.getText().toString();
-
-            // If the SeekBar value is 0, prevent proceeding
-            if (distance == 0) {
-                Toast.makeText(Question1.this, "Distance cannot be 0. Please adjust the SeekBar.", Toast.LENGTH_SHORT).show();
-                return; // Exit early if distance is 0
-            }
-
-            // Add the selected transportation method to the transportationDetails string
-            StringBuilder transportationDetails = new StringBuilder();
-            transportationDetails.append(selectedTransport).append(" ");
-
-            // Example logic for calculating carbon footprint
-            switch (selectedTransport) {
-                case "Bus":
-                    totalCarbonFootprint = distance * 90; // Example: Bus emits 90g CO2 per km
-                    break;
-                case "Jeep":
-                    totalCarbonFootprint = distance * 150;
-                    break;
-                case "Car":
-                    totalCarbonFootprint = distance * 170;
-                    break;
-                case "Tricycle":
-                    totalCarbonFootprint = distance * 71;
-                    break;
-                case "Motorcycle":
-                    totalCarbonFootprint = distance * 60;
-                    break;
-                case "Bike":
-                case "Walk":
-                    totalCarbonFootprint = 0; // No emissions
-                    break;
-            }
-
-            Log.d("Question1", "Selected: " + selectedTransport);
-            Log.d("Question1", "Total Carbon Footprint: " + totalCarbonFootprint);
-            Log.d("Question1", "Transportation details: " + transportationDetails.toString());
-
-            // Get the current user ID and fetch the user's details from Firestore
-            String userId = mAuth.getCurrentUser().getUid();
-            CollectionReference usersRef = db.collection("users");
-
-            // Fetch the user document
-            usersRef.document(userId).get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        // Fetch firstName, lastName, and username from the user document
-                        String firstName = document.getString("firstName");
-                        String lastName = document.getString("lastName");
-                        String username = document.getString("username");
-
-                        // Now, store the data in the 'carbon_footprints' collection
-                        CollectionReference carbonFootprintsRef = db.collection("carbon_footprints");
-
-                        // Create a document with user details and the calculated carbon footprint
-                        Map<String, Object> carbonData = new HashMap<>();
-                        carbonData.put("firstName", firstName);
-                        carbonData.put("lastName", lastName);
-                        carbonData.put("username", username); // Store username
-                        carbonData.put("Question1", distance + " km " + transportationDetails.toString());
-                        carbonData.put("carbonFootprint", totalCarbonFootprint);
-
-                        // Add the data to the 'carbon_footprints' collection with auto-generated document ID
-                        carbonFootprintsRef.add(carbonData)
-                                .addOnSuccessListener(documentReference -> {
-                                    Log.d("Firestore", "Data added with auto-generated ID: " + documentReference.getId());
-                                })
-                                .addOnFailureListener(e -> {
-                                    Log.e("Firestore", "Error adding document", e);
-                                });
-
-                        // Proceed to the next activity
-                        Intent intent = new Intent(Question1.this, Question2.class);
-                        intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
-                        startActivity(intent);
-                    }
-                } else {
-                    Log.d("Firestore", "Failed to fetch user details");
+                // Build the transportation mode string dynamically based on the checkboxes
+                StringBuilder transportationDetails = new StringBuilder();
+                if (btnTric.isChecked()) {
+                    transportationDetails.append("Tricycle ");
+                    totalCarbonFootprint += distance * 71; // Example: Tricycle emits 71g CO2 per km
                 }
-            });
+                if (btnJeep.isChecked()) {
+                    transportationDetails.append("Jeep ");
+                    totalCarbonFootprint += distance * 150; // Example: Jeep emits 150g CO2 per km
+                }
+                if (btnBus.isChecked()) {
+                    transportationDetails.append("Bus ");
+                    totalCarbonFootprint += distance * 90; // Example: Bus emits 90g CO2 per km
+                }
+                if (btnCar.isChecked()) {
+                    transportationDetails.append("Car ");
+                    totalCarbonFootprint += distance * 170; // Example: Car emits 170g CO2 per km
+                }
+                if (btnMotor.isChecked()) {
+                    transportationDetails.append("Motorcycle ");
+                    totalCarbonFootprint += distance * 0; // Motorcycle emits 0g CO2 per km
+                }
+
+                // If no checkbox is selected, show a message
+                if (transportationDetails.length() == 0) {
+                    transportationDetails.append("No transportation selected");
+                }
+
+                // Log the carbon footprint for debugging
+                Log.d("Question1", "Total Carbon Footprint: " + totalCarbonFootprint);
+
+                // Get the current user ID and fetch the user's details from Firestore
+                String userId = mAuth.getCurrentUser().getUid();
+                CollectionReference usersRef = db.collection("users");
+
+                // Fetch the user document
+                usersRef.document(userId).get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Fetch firstName, lastName, and username from the user document
+                            String firstName = document.getString("firstName");
+                            String lastName = document.getString("lastName");
+                            String username = document.getString("username"); // Fetch username
+
+                            // Now, store the data in the 'carbon_footprints' collection
+                            CollectionReference carbonFootprintsRef = db.collection("carbon_footprints");
+
+                            // Create a document with user details and the calculated carbon footprint
+                            Map<String, Object> carbonData = new HashMap<>();
+                            carbonData.put("firstName", firstName);
+                            carbonData.put("lastName", lastName);
+                            carbonData.put("username", username); // Store username
+                            carbonData.put("Question1", distance + " km " + transportationDetails.toString());
+                            carbonData.put("transportationFootprint", totalCarbonFootprint); // Changed to transportationFootprint
+
+                            // Add the data to the 'carbon_footprints' collection with auto-generated document ID
+                            carbonFootprintsRef.add(carbonData)
+                                    .addOnSuccessListener(documentReference -> {
+                                        Log.d("Firestore", "Data added with auto-generated ID: " + documentReference.getId());
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e("Firestore", "Error adding document", e);
+                                    });
+
+                            // Proceed to the next activity
+                            Intent intent = new Intent(Question1.this, Question2.class);
+                            intent.putExtra("selectedValue", finalAnswer); // Pass the final answer to the next activity
+                            startActivity(intent);
+                        }
+                    } else {
+                        Log.d("Firestore", "Failed to fetch user details");
+                    }
+                });
+            }
         });
     }
-    }
+}

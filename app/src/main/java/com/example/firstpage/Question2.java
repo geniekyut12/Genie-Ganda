@@ -3,27 +3,40 @@ package com.example.firstpage;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Question2 extends AppCompatActivity {
 
     private SeekBar seekBar;
     private TextView SBtext2;
-    private Button Question2;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question2);
 
-        // Initialize the SeekBar, TextView, and Button
+        // Initialize Firebase instances
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+        // Initialize the SeekBar and TextView
         seekBar = findViewById(R.id.seekBar2);
         SBtext2 = findViewById(R.id.SBtext2);
-
 
         // Retrieve transportation carbon footprint from intent
         double transportationCarbon = getIntent().getDoubleExtra("transportation_carbon", 0.0);
@@ -50,15 +63,15 @@ public class Question2 extends AppCompatActivity {
                 // Perform calculation for food carbon footprint
                 double foodCarbon = calculateCarbonFootprint(weight);
 
-                // Combine food carbon footprint with transportation carbon footprint
-                double totalCarbon = transportationCarbon + foodCarbon;
+                // Show a Toast with the calculated food carbon footprint
+                Toast.makeText(Question2.this, "Food Carbon Footprint: " + foodCarbon + " kg CO₂", Toast.LENGTH_SHORT).show();
 
-                // Show a Toast with the calculated carbon footprint
-                Toast.makeText(Question2.this, "Total Carbon Footprint: " + totalCarbon + " kg CO₂", Toast.LENGTH_SHORT).show();
+                // Save the combined results of Question1 and Question2 to Firestore
+                saveToFirestore(weight, foodCarbon, transportationCarbon);
 
-                // Redirect to the next activity (FoodWasteActivity)
+                // Redirect to the next activity
                 Intent intent = new Intent(Question2.this, Question3.class);
-                intent.putExtra("total_carbon", totalCarbon);
+                intent.putExtra("total_carbon", transportationCarbon + foodCarbon); // Pass combined carbon footprint
                 startActivity(intent);
 
                 // Optionally finish this activity to remove it from the back stack
@@ -72,4 +85,44 @@ public class Question2 extends AppCompatActivity {
         // Example logic: 2.5 kg CO₂ per kg of food
         return weight * 2.5;
     }
+
+    private void saveToFirestore(int weight, double foodCarbon, double transportationCarbon) {
+        String userId = mAuth.getCurrentUser().getUid();
+        String username = mAuth.getCurrentUser().getDisplayName(); // Assuming username is available as display name
+
+        CollectionReference carbonFootprintsRef = db.collection("carbon_footprints");
+
+        // Fetch and update the existing document
+        carbonFootprintsRef.whereEqualTo("username", username).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                QueryDocumentSnapshot document = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
+                String docId = document.getId();
+
+                // Prepare the combined data for Question1 and Question2
+                Map<String, Object> updatedData = new HashMap<>();
+
+                // Question1: Transportation
+                updatedData.put("Question1", document.get("Question1")); // Retain existing transportation data
+
+                // Question2: Food consumption
+                Map<String, Object> question2Data = new HashMap<>();
+                question2Data.put("mealConsumption", weight + " kg");
+                question2Data.put("foodCarbonFootprint", foodCarbon + " kg CO₂");
+                updatedData.put("Question2", question2Data);
+
+                // Update the document with the combined data
+                carbonFootprintsRef.document(docId).update(updatedData)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(Question2.this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(Question2.this, "Failed to save data: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+
+            } else {
+                Toast.makeText(Question2.this, "No document found for user: " + username, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

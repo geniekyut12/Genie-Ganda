@@ -109,11 +109,9 @@
     <string name="enqEnt">Enquiries can be directed to:</string>
     <string name="masugidIG">\@masugid_enterprise</string>
     <string name="mas_email">masugidenterprise2b@gmail.com</string>
-    <string name="masugiddesc">Masugid Enterprise is a student-led business from Quezon City University (QCU) offering churros with a unique twist—served with creamy matcha. \n\nThis venture combines the popular snack of churros with a rich, smooth matcha flavor, appealing to those who enjoy classic treats with a modern, flavorful upgrade.</string>
     <string name="masugidtitle">Masugid Enterprise</string>
     <string name="Wani">Wani Enterprise</string>
     <string name="sawaff">“Sa-WAFF Panalo”</string>
-    <string name="wanidesc">Wani Enterprise, run by Quezon City University (QCU) students, offers unique, savory waffles for an affordable 25 pesos each. With flavors like asado and adobo, the business blends Filipino-inspired tastes with the popular waffle format, aiming to provide a satisfying and budget-friendly snack for students and the local community.</string>
     <string name="waniIG">\@wanienterprise</string>
     <string name="wani_num">0951-003-5060</string>
     <string name="waniPhone">\n</string>
@@ -123,7 +121,6 @@
     <string name="playm_fb">Playmaker Enterprise</string>
     <string name="playmtitle">Playmaker Enterprise</string>
     <string name="jackofpie">“Langka-Tulad, Langka-Pantay at \nLangkasing-Sarap na Jack of Pie”</string>
-    <string name="playmdesc">Playmaker Enterprise is established by a group of students from Quezon City University, pursuing a Bachelor of Science in Entrepreneurship, with a shared vision and determination to make a meaningful impact in the culinary landscape. Drawing upon their academic background and passion for entrepreneurship, the students saw an opportunity to leverage their skills and creativity to create a business that not only generates profits but also makes a positive difference in their community.\n\nWith a focus on serving delicious pies infused with the unique flavors of jackfruit, the students recognized the potential to introduce something innovative and distinctive to the market. Their choice of jackfruit as a main ingredient reflects not only their desire to offer something unexpected and delightful but also their commitment to supporting local agriculture and promoting sustainability.</string>
     <string name="challenge_home">Challenge yourself now!</string>
     <string name="homepagedesc">C-Verde collaborates with Masugid, Wani, and Playmaker to promote sustainability through user engagement. Users can earn discounts or vouchers by participating in challenges and when users reach specific carbon emission reduction goals. The potential larger discounts are redeemable green products from the enterprises.</string>
 
@@ -193,6 +190,24 @@
     <string name="Warn_Img">\n</string>
     <string name="q1pop">Your actions are harming the environment. But it’s never too late to make a positive change! Start by taking on these daily challenges.</string>
     <string name="ok">OK</string>
+    <string name="masugidprod">MASUGID’s Product</string>
+    <string name="churrodesc">"On November 14, 2024, the enterprise launched a new product, a churro with chocolate filling."</string>
+    <string name="masugiddesc">"                                       is a student-led business from Quezon City University (QCU) offering churros with a unique twist—served with creamy matcha. This venture combines the popular snack of churros with a rich, smooth matcha flavor, appealing to those who enjoy classic treats with a modern, flavorful upgrade."</string>
+    <string name="chocodesc">“Our newest chocolate flavor has arrived. It is rich, sweet, and made to satisfy your chocolate cravings.\"</string>
+    <string name="waniprod">WANI’s  Product</string>
+    <string name="wanipromo">WANI’s  Promo</string>
+    <string name="wanidesc">"                                run by Quezon City University (QCU) students, offers unique, savory waffles for an affordable 25 pesos each. With flavors like asado and adobo, the business blends Filipino-inspired tastes with the popular waffle format, aiming to provide a satisfying and budget-friendly snack for students and the local community."</string>
+    <string name="playmdesc">"                                 students from Quezon City University, pursuing a Bachelor of Science in Entrepreneurship, founded Playmaker Enterprise. With a shared vision of making a positive impact on the culinary landscape, they introduced innovative jackfruit-infused pies.\n\nBy leveraging their skills and passion, they created a business that not only generates profits but also supports local agriculture and sustainability. Their commitment to quality, innovation, and customer satisfaction has made Playmaker Enterprise a rising star in the food industry, delighting customers with their unique and delicious treats."</string>
+    <string name="playmprod">PLAYMAKER’s  Product</string>
+
+    <string name="Tellusaboutyourself">Tell us about yourself</string>
+    <string name="nametxt">First Name</string>
+    <string name="names">Juan</string>
+    <string name="lastnames">Dela Cruz</string>
+    <string name="date">Date of Birth</string>
+    <string name="Savechanges">Save Changes</string>
+    <string name="TAC"><![CDATA[Terms & Condition]]></string>
+    <string name="DelAcc">Delete My Account</string>
 
 
 </resources>

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 // Redirect to onboarding questions if not complete
-                Intent intent = new Intent(MainActivity.this, Questions.class);
+                Intent intent = new Intent(MainActivity.this, navbar.class);
                 startActivity(intent);
             }
             finish();  // Stop MainActivity

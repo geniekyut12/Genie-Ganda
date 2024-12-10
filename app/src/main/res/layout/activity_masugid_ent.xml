@@ -73,13 +73,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/masugidDes" />
 
-        <TextView
+            <ImageView
+                android:id="@+id/masugidpic"
+                android:layout_width="450dp"
+                android:layout_height="196dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/masugidpic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/masugid_mach" />
+
+            <TextView
+                android:id="@+id/masug"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="left"
+                android:lineSpacingExtra="4dp"
+                android:padding="16dp"
+                android:text="@string/masugidtitle"
+                android:textColor="@color/entsoc"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/masugidpic" />
+
+            <TextView
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppinsregular"
-            android:gravity="center"
+            android:gravity="fill_horizontal"
             android:lineSpacingExtra="4dp"
             android:padding="16dp"
             android:text="@string/masugiddesc"
@@ -88,36 +116,69 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/masugid_mach" />
+            app:layout_constraintTop_toBottomOf="@id/masugidpic" />
 
-        <ImageView
-            android:id="@+id/masugidpic"
-            android:layout_width="450dp"
-            android:layout_height="196dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/masugidpic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description" />
+            <TextView
+                android:id="@+id/masugidProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/masugidprod"
+                android:textColor="#000000"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Inquiry Label -->
+            <!-- Matcha -->
+            <ImageView
+                android:id="@+id/matcha_churro"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:src="@drawable/masug_matchur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/masugidProd" />
 
-        <!-- Instagram Section -->
+            <TextView
+                android:id="@+id/churroDes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="20dp"
+                android:gravity="fill_horizontal"
+                android:text="@string/churrodesc"
+                android:textColor="#000000"
+                android:fontFamily="@font/poppinsregular"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/matcha_churro"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+            <ImageView
+                android:id="@+id/choco_churro"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/masug_chochur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/churroDes" />
+
+            <!-- Contact Details -->
+            <TextView
             android:id="@+id/masEnq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="92dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginTop="52dp"
+                android:layout_marginStart="18dp"
             android:text="@string/enqEnt"
             android:textColor="@color/entsoc"
             android:textSize="18sp"
             android:fontFamily="@font/afacad"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.158"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/masugidpic" />
+            app:layout_constraintTop_toBottomOf="@id/choco_churro" />
 
         <ImageView
             android:id="@+id/mas_ig"
